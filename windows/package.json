@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@fluentui/react-icons": "^2.0.330",
-    "@tailwindcss/vite": "^4.0.0",
+    "@fluentui/react-icons": "^2.0.344",
+    "@tailwindcss/vite": "^4.3.3",
     "@vitejs/plugin-react": "^4.7.0",
     "concurrently": "^9.0.0",
     "cross-env": "^10.0.0",
@@ -34,12 +34,12 @@
     "eslint": "^10.12.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.13.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "tailwindcss": "^4.0.0",
     "vite": "^6.0.0",
-    "wait-on": "^9.0.0",
-    "zustand": "^5.0.0"
+    "wait-on": "^9.5.1",
+    "zustand": "^5.0.16"
   },
   "build": {
     "appId": "com.wimvandonck.notiontimer",
