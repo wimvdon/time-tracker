@@ -76,7 +76,7 @@ The two codebases share no code. They agree on Notion page shapes and the sync p
 
 - Until the user is signed in and at least one workspace is set, the timer screen shows a full-screen "setup needed" state instead of the timer ("Connect to Notion", then "Add a workspace"), with a button to Settings. The rule is shared: `src/lib/setupStep.js` and `viewmodel/SetupStep.kt`.
 - Description and extra field edits are written with `PATCH /pages/{id}` (description 800 ms after the last keystroke and on Enter or blur, extra fields 600 ms after the last change). An emptied description is only written on Enter/Done, Stop or (Windows) blur; the rule is shared: `src/lib/descriptionAutoSave.js` and `viewmodel/DescriptionAutoSave.kt`.
-- Changing **Start time** rewrites the date. Filling **End time** stops at that time.
+- Changing **Start time** rewrites the date, and the running time (on screen and, on Android, in the notification, whose Stop button then uses the new start) counts from the new start right away (`viewmodel/RunningClock.kt`). Filling **End time** stops at that time.
 
 ### Stop
 
