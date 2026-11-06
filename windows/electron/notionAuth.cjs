@@ -16,7 +16,7 @@ const crypto = require('crypto');
 const http = require('http');
 
 /** The sign-in server. The only address besides api.notion.com the app talks to. */
-const AUTH_SERVER_URL = 'https://timetracker-signin.wim.to';
+const AUTH_SERVER_URL = 'https://timetracker.wim.to';
 
 /** How long the app waits for the browser to come back before giving up. */
 const SIGN_IN_TIMEOUT_MS = 10 * 60 * 1000;

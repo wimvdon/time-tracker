@@ -154,7 +154,7 @@ The installation folder is `time-tracker` for new installs, `notion-timer` when 
 
 ## 5. Sign-in server
 
-`worker/src/index.js`, at `https://timetracker-signin.wim.to`. Sign-in stores nothing: `state` is signed with `STATE_SECRET` and expires after 15 minutes. Settings sync stores one payload per user (`worker/src/sync.js`, a SQLite-backed Durable Object per user).
+`worker/src/index.js`, at `https://timetracker.wim.to`. Sign-in stores nothing: `state` is signed with `STATE_SECRET` and expires after 15 minutes. Settings sync stores one payload per user (`worker/src/sync.js`, a SQLite-backed Durable Object per user).
 
 | Request | What it does |
 |---|---|

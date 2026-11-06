@@ -1,7 +1,7 @@
 # Setting up "Sign in with Notion"
 
 The apps sign in to Notion through a small sign-in server: a Cloudflare Worker (`worker/` in this
-repository) at **https://timetracker-signin.wim.to**. It holds Notion's client secret, which can't
+repository) at **https://timetracker.wim.to**. It holds Notion's client secret, which can't
 be kept safely inside an app, and only swaps Notion's one-time sign-in code for a token (and
 renews tokens). It also keeps each user's synced settings, in Durable Objects that Cloudflare
 creates by itself on deploy (nothing to set up). How it works: [architecture.md](architecture.md#sign-in-with-notion).
@@ -21,7 +21,9 @@ The two secrets never go in the repository or in an app.
 In Notion's developer portal ([app.notion.com/developers/connections](https://app.notion.com/developers/connections)),
 open the public connection for Time Tracker:
 
-1. **Redirect URI:** `https://timetracker-signin.wim.to/callback` (exactly this, no slash at the end).
+1. **Redirect URIs:** `https://timetracker.wim.to/callback` (exactly this, no slash at the end).
+   Keep the old `https://timetracker-signin.wim.to/callback` next to it until no device runs
+   version 1.8 or older (they still sign in there); then remove it here and in `worker/wrangler.toml`.
 2. **Capabilities:** Read content, Update content, Insert content, and Read user information
    **without** email addresses (for "person" fields).
 3. **Icon:** the app icon (512×512 PNG).
@@ -31,7 +33,7 @@ open the public connection for Time Tracker:
 
 Cloudflare builds and deploys the worker itself whenever `main` changes (Workers Builds). The
 domain `wim.to` must be in the same Cloudflare account; the worker adds
-`timetracker-signin.wim.to` to it by itself on the first deploy.
+`timetracker.wim.to` (and, for versions up to 1.8, `timetracker-signin.wim.to`) to it by itself on deploy.
 
 1. Cloudflare → **Workers & Pages → Create application → Import a repository**.
 2. **Connect GitHub** (first time only): allow the Cloudflare app on GitHub, for this repository
@@ -54,7 +56,7 @@ Variables and Secrets → Add**, type **Secret**, twice:
 - `STATE_SECRET`: a long random password (40+ characters, from a password manager). Changing it
   later only cancels sign-ins that are in progress at that moment.
 
-**Deploy** after adding them. Check: opening https://timetracker-signin.wim.to/ in a browser shows
+**Deploy** after adding them. Check: opening https://timetracker.wim.to/ in a browser shows
 `{"error":"not_found"}`. That means the worker runs.
 
 ## If the client secret leaks

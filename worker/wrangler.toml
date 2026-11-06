@@ -5,8 +5,13 @@ name = "time-tracker-for-notion"
 main = "src/index.js"
 compatibility_date = "2026-10-01"
 workers_dev = false
-# Notion's redirect URL is https://timetracker-signin.wim.to/callback (the wim.to zone is on Cloudflare).
-routes = [{ pattern = "timetracker-signin.wim.to", custom_domain = true }]
+# The apps use https://timetracker.wim.to; Notion's redirect URL is https://timetracker.wim.to/callback
+# (the wim.to zone is on Cloudflare). timetracker-signin.wim.to is the address of versions up to 1.8:
+# keep answering on it (and its redirect URL in Notion) until no device runs those any more.
+routes = [
+  { pattern = "timetracker.wim.to", custom_domain = true },
+  { pattern = "timetracker-signin.wim.to", custom_domain = true },
+]
 
 [vars]
 # Notion's OAuth client ID is public (it is part of every sign-in link), so it lives here.

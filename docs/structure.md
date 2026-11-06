@@ -18,7 +18,7 @@ time-tracker-for-notion/
 ├── README.md
 ├── docs/
 ├── worker/                           "Sign in with Notion" and settings sync server (Cloudflare Worker, no dependencies)
-│   ├── wrangler.toml                 Worker name and the timetracker-signin.wim.to domain (secrets live in Cloudflare)
+│   ├── wrangler.toml                 Worker name and the timetracker.wim.to domain (secrets live in Cloudflare)
 │   └── src/                          index.js (routes), auth.js (signed state, token swap), sync.js (settings per user), page.js (browser pages), tests
 ├── windows/                          Electron desktop app
 │   ├── .nvmrc                        Node.js version (24), used by CI and for development

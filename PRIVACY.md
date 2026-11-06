@@ -7,7 +7,7 @@ Time Tracker (Windows and Android; published as "Time Tracker for Notion") has n
 ## What the apps send, and to whom
 
 - **Notion (api.notion.com).** When you sign in with Notion, you choose on Notion's own page which pages and databases the app may use. The apps then read those, and create and update time entries in them.
-- **The sign-in and sync server (timetracker-signin.wim.to)**, a small Cloudflare Worker run for this app.
+- **The sign-in and sync server (timetracker.wim.to; versions up to 1.8 use timetracker-signin.wim.to, the same server)**, a small Cloudflare Worker run for this app.
   - *Signing in:* it receives Notion's one-time sign-in code, or the app's renewal token when Notion asks the app to renew its sign-in, passes it to Notion together with the app's own secret, and returns Notion's answer (your new sign-in and the name of your Notion workspace). It does not keep these.
   - *Settings sync* (on unless you turn it off in Settings): it stores one copy of your synced settings: your workspaces (names, colours, Notion database IDs, property names, extra fields, presets with their names and default values), theme, language, date and time format, and the two Notion action switches. Not your time entries, not your Notion sign-in. To know whose settings they are, it asks Notion who your sign-in belongs to and files them under your Notion workspace ID and user ID. **Delete synced settings** in Settings removes the copy from the server and turns sync off on that device.
   - It keeps no logs of its own. Cloudflare, which runs it, sees the requests like any web host does (for example your IP address), under [Cloudflare's privacy policy](https://www.cloudflare.com/privacypolicy/).

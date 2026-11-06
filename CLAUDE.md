@@ -45,7 +45,7 @@ time.
   `isTrustedSender` IPC check in `windows/electron/main.cjs`, or the Electron fuses in
   `windows/package.json`.
 - Add network access beyond the Notion API (`api.notion.com`) and the sign-in server
-  (`timetracker-signin.wim.to`, `worker/`), telemetry, analytics, crash
+  (`timetracker.wim.to`, `worker/`), telemetry, analytics, crash
   reporting or ads, or Android permissions beyond the ones in `PRIVACY.md`.
 - Add dependencies (npm packages, libraries or Gradle plugins). Prefer what is already there.
   If one is needed, say why and check it is widely used and maintained.
