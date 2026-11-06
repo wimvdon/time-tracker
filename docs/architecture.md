@@ -99,7 +99,7 @@ Lists are merged by page id to avoid flicker. Timers stopped locally within the 
 ### Sign in with Notion
 
 Notion's sign-in (OAuth) needs a client secret, which can't be kept inside an app people download.
-A small Cloudflare Worker (`worker/`, at `https://timetracker-signin.wim.to`) holds it. It stores
+A small Cloudflare Worker (`worker/`, at `https://timetracker.wim.to`) holds it. It stores
 nothing: what it needs travels in a signed `state`. Setup: [notion-sign-in-setup.md](notion-sign-in-setup.md).
 Requests: [api.md](api.md#5-sign-in-server).
 

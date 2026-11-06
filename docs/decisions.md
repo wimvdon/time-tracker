@@ -31,7 +31,7 @@ stored (owner approved storing settings on the server).
 
 The owner asked for Notion's sign-in (OAuth) instead of pasting an internal-integration API key.
 Notion's token exchange needs a client secret, which can't be kept safely inside a downloadable
-app, so a small Cloudflare Worker (`worker/`, `https://timetracker-signin.wim.to`) holds it and does
+app, so a small Cloudflare Worker (`worker/`, `https://timetracker.wim.to`) holds it and does
 only the code swap and token renewal. Sign-in stores nothing; a signed `state` carries what it needs.
 The apps prove they started the sign-in with a PKCE-style verifier (Notion's OAuth has no PKCE of
 its own), so a caught link or code is useless to anyone else. Windows gets the code back on a
@@ -268,3 +268,7 @@ Merge either update only when all three CI jobs, including the installer smoke t
 - **Android:** a new application ID is a new app to Android. Phones with v1.8 or older keep that app; it does not update. Install the new one, sign in with Notion again (settings come back through settings sync), then uninstall the old one.
 - **Windows updates in place.** The installer keeps the old installer ID (`nsis.guid` in `package.json`, the value electron-builder derived from the old app ID; the Dev build keeps its own in `electron-builder.dev.cjs`), so it replaces the installed *Time Tracker for Notion* instead of installing a second app. The first start moves `%APPDATA%\Time Tracker for Notion` to `%APPDATA%\Time Tracker` (`electron/dataFolder.cjs`), so settings and the Notion sign-in carry over. Taskbar pins of the old app point to its old file and need pinning again. `electron/buildConfig.test.cjs` checks these values.
 - **Not renamed:** the sign-in link schemes (`timetrackerfornotion://`, worker), the Android data file names and the electron-store key, because changing them would break sign-in or stored data for no visible gain.
+
+## Sign-in server address `timetracker.wim.to` (2026-11-06)
+
+The apps use `https://timetracker.wim.to` instead of `https://timetracker-signin.wim.to`; Notion's redirect URL is `https://timetracker.wim.to/callback`. The worker answers on both addresses (`worker/wrangler.toml`) and builds Notion's redirect URL from the address it is called on, so versions up to 1.8 keep signing in and syncing on the old address (Notion keeps both redirect URLs). Synced settings are stored per Notion user, not per address, so both reach the same data. Remove the old address once no device runs 1.8 or older.

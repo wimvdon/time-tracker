@@ -27,7 +27,7 @@ import java.util.Base64
  */
 object AuthServer {
     /** The only address besides api.notion.com the app talks to. Same as Windows (notionAuth.cjs). */
-    const val URL = "https://timetracker-signin.wim.to"
+    const val URL = "https://timetracker.wim.to"
 
     /** Which app link the server sends the browser back to: the Dev build has its own. */
     fun platform(packageName: String): String =
