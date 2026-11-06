@@ -55,7 +55,7 @@ jobs:
       - name: Audit the dependencies that ship in the app
         run: npm audit --omit=dev --audit-level=high
 
-  # Builds the "Time Tracker for Notion Dev" installer, which installs next to the real app with
+  # Builds the "Time Tracker Dev" installer, which installs next to the real app with
   # its own settings, and checks on a real Windows machine that it installs, starts and uninstalls.
   windows-installer:
     name: Windows build
@@ -121,11 +121,11 @@ jobs:
             echo "artifact=release/$name"
           } >> "$GITHUB_OUTPUT"
           echo "### Dev installer: \`$name\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "Download it from **Artifacts** below. It installs as *Time Tracker for Notion Dev*, next to your real app, with its own settings." >> "$GITHUB_STEP_SUMMARY"
+          echo "Download it from **Artifacts** below. It installs as *Time Tracker Dev*, next to your real app, with its own settings." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Install, start and uninstall it
         shell: pwsh
-        run: ./scripts/smoke-test-installer.ps1 -Installer '${{ steps.installer.outputs.path }}' -ProductName 'Time Tracker for Notion Dev' -WindowTitle 'Time Tracker'
+        run: ./scripts/smoke-test-installer.ps1 -Installer '${{ steps.installer.outputs.path }}' -ProductName 'Time Tracker Dev' -WindowTitle 'Time Tracker'
 
       - name: Upload the installer
         uses: actions/upload-artifact@v7

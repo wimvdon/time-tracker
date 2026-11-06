@@ -139,10 +139,10 @@ Every channel is registered through `handle()` / `on()` in `main.cjs`, which rej
 Example desktop shortcut target:
 
 ```bat
-"%LOCALAPPDATA%\Programs\Time Tracker for Notion\Time Tracker for Notion.exe" --preset=3f2c…
+"%LOCALAPPDATA%\Programs\time-tracker\Time Tracker.exe" --preset=3f2c…
 ```
 
-Preset ids are visible in `%APPDATA%\Time Tracker for Notion\config.json` (obfuscated; the API key inside is encrypted).
+The installation folder is `time-tracker` for new installs, `notion-timer` when updated from v1.8 or older; right-click the Start menu entry → Open file location to see it. Preset ids are visible in `%APPDATA%\Time Tracker\config.json` (obfuscated; the API key inside is encrypted).
 
 ## 5. Android intents
 
@@ -150,7 +150,7 @@ Preset ids are visible in `%APPDATA%\Time Tracker for Notion\config.json` (obfus
 |---|---|---|
 | `ACTION_VIEW` with extras `preset_workspace_id`, `preset_id` | `MainActivity` | Starts the preset (used by the dynamic launcher shortcuts, max 4) |
 | `ACTION_STOP_TIMER` | `TimerForegroundService` (not exported) | Notification **Stop** button: stops the entry in Notion |
-| Broadcast `com.impca201.notiontimetracker.TIMER_STOPPED` (extra: page id) | `MainActivity` receiver | Tells a visible UI the service stopped the timer |
+| Broadcast `to.wim.timetracker.TIMER_STOPPED` (extra: page id) | `MainActivity` receiver | Tells a visible UI the service stopped the timer |
 
 ## 5. Sign-in server
 

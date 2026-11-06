@@ -1,4 +1,4 @@
-// "Sign in with Notion" for Time Tracker for Notion (Windows and Android).
+// "Sign in with Notion" for Time Tracker (Windows and Android).
 //
 // Notion's OAuth needs a client secret to swap the one-time sign-in code for a token. A secret
 // can't be kept inside an app people download, so this worker holds it and does only that swap

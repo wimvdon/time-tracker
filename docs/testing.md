@@ -67,7 +67,7 @@ No coverage tool is configured.
 
 ## Manual checks
 
-For each pull request (before or after it is merged: merging only waits for green CI), install the Dev installer and/or the debug APK from the CI run (both install next to the real apps, as *Time Tracker for Notion Dev* and *Time Tracker Dev*) and follow the steps in the pull request. Before a release, also check:
+For each pull request (before or after it is merged: merging only waits for green CI), install the Dev installer and/or the debug APK from the CI run (both install next to the real apps, as *Time Tracker Dev* and *Time Tracker Dev*) and follow the steps in the pull request. Before a release, also check:
 
 - [ ] Start and stop a timer on each platform; the Notion row gets its start, end and status.
 - [ ] Dark mode on and off: text stays readable.

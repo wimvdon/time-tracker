@@ -173,7 +173,7 @@ jobs:
             case "$file" in *__uninstaller*) ;; *) [ -e "$file" ] && name="$(basename "$file")" && break ;; esac
           done
           [ -n "$name" ] || { echo "::error::No installer found in release/"; exit 1; }
-          product="Time Tracker for Notion"
+          product="Time Tracker"
           if [ "$PUBLISH" != "true" ]; then product="$product Dev"; fi
           {
             echo "path=../release/$name"

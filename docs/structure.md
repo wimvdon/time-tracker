@@ -28,7 +28,7 @@ time-tracker-for-notion/
 │   ├── index.html                    Renderer entry HTML
 │   ├── assets/                       icon.svg (source), icon.ico/png, tray icons
 │   ├── scripts/generate-icons.cjs    Renders all icons from one vector design (desktop + Android)
-│   ├── electron-builder.dev.cjs      Dev installer: same build, installs as "Time Tracker for Notion Dev"
+│   ├── electron-builder.dev.cjs      Dev installer: same build, installs as "Time Tracker Dev"
 │   ├── eslint.config.js              Lint rules (the UI may not import Node.js/Electron)
 │   ├── scripts/smoke-test-installer.ps1  CI: install, start and uninstall the installer on Windows
 │   ├── electron/
@@ -79,8 +79,8 @@ time-tracker-for-notion/
         ├── src/test/kotlin/…/        JVM unit tests (NotionSessionTest, SyncPayloadJsonTest, …)
         └── src/main/
             ├── AndroidManifest.xml
-            ├── kotlin/com/impca201/notiontimetracker/
-            │   ├── NotionTimeTrackerApp.kt   Creates repositories and syncer
+            ├── kotlin/to/wim/timetracker/
+            │   ├── TimeTrackerApp.kt   Creates repositories and syncer
             │   ├── MainActivity.kt           Compose host, navigation, shortcut + service intents
             │   ├── ShortcutHelper.kt         Preset launcher shortcuts
             │   ├── LocaleHelper.kt           In-app language override

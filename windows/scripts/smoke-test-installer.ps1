@@ -7,8 +7,8 @@
   packaged app with all its security switches ("fuses") turned on.
 
 .EXAMPLE
-  ./scripts/smoke-test-installer.ps1 -Installer '../release/Time Tracker for Notion Dev Setup 1.0.0.exe' `
-    -ProductName 'Time Tracker for Notion Dev' -WindowTitle 'Time Tracker'
+  ./scripts/smoke-test-installer.ps1 -Installer '../release/Time Tracker Dev Setup 1.0.0.exe' `
+    -ProductName 'Time Tracker Dev' -WindowTitle 'Time Tracker'
 #>
 param(
   [Parameter(Mandatory)] [string] $Installer,
