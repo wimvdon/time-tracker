@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Window theme only; all UI is drawn with Compose Material 3. -->
-    <style name="Theme.NotionTimeTracker" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="Theme.TimeTracker" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@color/window_background</item>
     </style>
 </resources>

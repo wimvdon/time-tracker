@@ -7,10 +7,11 @@ plugins {
 }
 
 // ---------------------------------------------------------------------------
-// App identity: the ONE place to change the package / application ID. It is already
-// released, so it must never change (phones would treat it as a different app).
+// App identity: the ONE place to change the package / application ID. Phones treat a
+// different ID as a different app (no update, no data carried over), so never change it
+// again. It was com.impca201.notiontimetracker up to v1.8.x (see docs/decisions.md).
 // ---------------------------------------------------------------------------
-val appId = "com.impca201.notiontimetracker"
+val appId = "to.wim.timetracker"
 
 // ---------------------------------------------------------------------------
 // Versioning

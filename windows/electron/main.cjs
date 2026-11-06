@@ -9,6 +9,14 @@ const { createTokenStore } = require('./notionTokens.cjs');
 const { createNotionSession } = require('./notionAuth.cjs');
 const { createSettingsSync, isSyncPayload } = require('./settingsSync.cjs');
 const { APP_ORIGIN, APP_SCHEME, resolveBundlePath } = require('./bundlePath.cjs');
+const { resolveDataFolder } = require('./dataFolder.cjs');
+
+// Before anything reads or writes the settings folder: carry over the folder from when the
+// app was called "Time Tracker for Notion" (dataFolder.cjs).
+{
+  const dataFolder = resolveDataFolder({ appData: app.getPath('appData'), appName: app.getName(), fs: require('fs') });
+  if (dataFolder !== app.getPath('userData')) app.setPath('userData', dataFolder);
+}
 
 // ---- Minimal PNG encoder (for the coloured tray icon) ----
 

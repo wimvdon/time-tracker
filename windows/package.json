@@ -1,6 +1,6 @@
 {
-  "name": "notion-timer",
-  "productName": "Time Tracker for Notion",
+  "name": "time-tracker",
+  "productName": "Time Tracker",
   "version": "1.0.0",
   "description": "Floating time-tracking widget that creates and manages time registrations in Notion",
   "author": "Wim Vandonck",
@@ -42,8 +42,8 @@
     "zustand": "^5.0.0"
   },
   "build": {
-    "appId": "com.wimvandonck.notiontimer",
-    "productName": "Time Tracker for Notion",
+    "appId": "to.wim.timetracker",
+    "productName": "Time Tracker",
     "directories": {
       "output": "../release"
     },
@@ -59,6 +59,7 @@
       "icon": "assets/icon.ico"
     },
     "nsis": {
+      "guid": "d912b892-eaac-5f68-a366-61f0aee8954e",
       "oneClick": true,
       "perMachine": false,
       "deleteAppDataOnUninstall": false

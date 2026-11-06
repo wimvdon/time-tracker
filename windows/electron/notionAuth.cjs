@@ -44,7 +44,7 @@ const PAGE_STRINGS = {
 function callbackPage(locale, ok) {
   const lang = String(locale || '').toLowerCase().split(/[-_]/)[0];
   const text = (PAGE_STRINGS[lang] || PAGE_STRINGS.en)[ok ? 'done' : 'failed'];
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Time Tracker for Notion</title>
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Time Tracker</title>
 <style>body{font-family:'Segoe UI',system-ui,sans-serif;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f3f3f3;color:#1b1b1b}p{max-width:24rem;text-align:center}@media (prefers-color-scheme:dark){body{background:#202020;color:#f3f3f3}}</style>
 </head><body><p>${text}</p></body></html>`;
 }

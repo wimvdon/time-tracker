@@ -1,8 +1,8 @@
 # Privacy policy
 
-_Last updated: 2026-10-31_
+_Last updated: 2026-11-06_
 
-Time Tracker for Notion (Windows and Android) has no analytics, advertising or crash reporting. Its only server of its own is the sign-in and sync server described below.
+Time Tracker (Windows and Android; published as "Time Tracker for Notion") has no analytics, advertising or crash reporting. Its only server of its own is the sign-in and sync server described below.
 
 ## What the apps send, and to whom
 
@@ -19,7 +19,7 @@ Time Tracker for Notion (Windows and Android) has no analytics, advertising or c
 - **Your Notion sign-in** (the tokens Notion gave the app, and your workspace's name), encrypted: on Windows with Windows' own data protection (only your Windows user on that PC can read it); on Android with the Android Keystore (`EncryptedSharedPreferences`). If encryption is not available on a device, it is kept unencrypted in the app's private storage so the app keeps working. **Sign out** in Settings deletes it. An API key saved by an older version is deleted when you update.
 - **Your settings**: workspaces (database IDs, property names, presets), the running timer, theme, language, window options, and whether settings sync is on.
 
-Windows keeps this in `%APPDATA%\Time Tracker for Notion` (the Dev test build in `%APPDATA%\Time Tracker for Notion Dev`). Android keeps it in the app's private storage. Your Notion sign-in is excluded from Android's cloud backup and device-to-device transfer; your other settings can be included in Android's backup if you turned that on.
+Windows keeps this in `%APPDATA%\Time Tracker` (the Dev test build in `%APPDATA%\Time Tracker Dev`; versions up to 1.8 used `%APPDATA%\Time Tracker for Notion`, which is moved there on the first start after updating). Android keeps it in the app's private storage. Your Notion sign-in is excluded from Android's cloud backup and device-to-device transfer; your other settings can be included in Android's backup if you turned that on.
 
 Uninstalling the Android app deletes everything. The Windows uninstaller keeps your settings folder, so a reinstall picks up where you left off; delete the folder above to remove them.
 

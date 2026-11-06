@@ -10,10 +10,10 @@
 
 ### On the PC
 
-<!-- Install the Dev installer: Checks → CI → Artifacts → "Time Tracker for Notion Dev Setup <version>.exe"
-     (SmartScreen: More info → Run anyway). It installs as "Time Tracker for Notion Dev" next to the real app. -->
+<!-- Install the Dev installer: Checks → CI → Artifacts → "Time Tracker Dev Setup <version>.exe"
+     (SmartScreen: More info → Run anyway). It installs as "Time Tracker Dev" next to the real app. -->
 
-1. Open **Time Tracker for Notion Dev** from the Start menu.
+1. Open **Time Tracker Dev** from the Start menu.
 2. …
 3. You should see …
 

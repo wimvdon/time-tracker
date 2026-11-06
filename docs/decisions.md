@@ -238,7 +238,7 @@ Following the Electron security checklist, beyond process isolation and the CSP:
 
 - **Only main-process packages are runtime dependencies** (`electron-store`). React, Fluent icons and Zustand are bundled into `dist/` by Vite, so they are dev dependencies and no longer shipped a second time inside the app: the packaged app code went from 119 MB to 1.9 MB.
 - **ESLint** with the recommended rules and the classic React hook rules (`rules-of-hooks`, `exhaustive-deps`). The newer React Compiler rules (`set-state-in-effect`, `refs`) are left off: they ask for rewrites of working effect code, which is riskier than the warnings are worth without a UI test suite. The UI is forbidden from importing Node.js or Electron.
-- **Dev builds install next to the real app.** `npm run dist:dev` (`electron-builder.dev.cjs`) builds *Time Tracker for Notion Dev*, with its own app ID, Start menu entry and settings folder, so testing a pull request never touches the real settings, token or running timer.
+- **Dev builds install next to the real app.** `npm run dist:dev` (`electron-builder.dev.cjs`) builds *Time Tracker Dev*, with its own app ID, Start menu entry and settings folder, so testing a pull request never touches the real settings, token or running timer.
 - **The installer is tested on Windows in CI.** `windows/scripts/smoke-test-installer.ps1` installs it silently, starts the installed app (with the fuses on), checks its window, and uninstalls it, on every pull request and before every release.
 - **Node.js 24**, the current LTS, in CI and for development. npm 11's `allowScripts` in `package.json` only lets esbuild run its install script.
 
@@ -260,3 +260,11 @@ Two Dependabot major updates were merged with red CI and reverted:
 - **@vitejs/plugin-react 6** requires Vite 8; the app uses Vite 6, so `npm ci` refused to install. Moving up needs Vite upgraded first (plugin-react 5.2 supports Vite 6 to 8).
 
 Merge either update only when all three CI jobs, including the installer smoke test, are green.
+
+## App name "Time Tracker" and app ID `to.wim.timetracker` (2026-11-06)
+
+- **Name:** the installed apps are called *Time Tracker* everywhere (Start menu, window, installer, settings folder, sign-in pages); the Dev builds are *Time Tracker Dev*. Only store listings and the project itself use *Time Tracker for Notion*. Android was already called *Time Tracker*; Windows was *Time Tracker for Notion* up to v1.8.
+- **App ID** on both platforms is `to.wim.timetracker` (the owner's domain, wim.to), replacing `com.impca201.notiontimetracker` (Android) and `com.wimvandonck.notiontimer` (Windows), before the Play Store release. Never change it again.
+- **Android:** a new application ID is a new app to Android. Phones with v1.8 or older keep that app; it does not update. Install the new one, sign in with Notion again (settings come back through settings sync), then uninstall the old one.
+- **Windows updates in place.** The installer keeps the old installer ID (`nsis.guid` in `package.json`, the value electron-builder derived from the old app ID; the Dev build keeps its own in `electron-builder.dev.cjs`), so it replaces the installed *Time Tracker for Notion* instead of installing a second app. The first start moves `%APPDATA%\Time Tracker for Notion` to `%APPDATA%\Time Tracker` (`electron/dataFolder.cjs`), so settings and the Notion sign-in carry over. Taskbar pins of the old app point to its old file and need pinning again. `electron/buildConfig.test.cjs` checks these values.
+- **Not renamed:** the sign-in link schemes (`timetrackerfornotion://`, worker), the Android data file names and the electron-store key, because changing them would break sign-in or stored data for no visible gain.

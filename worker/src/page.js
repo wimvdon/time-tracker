@@ -2,42 +2,42 @@
 
 const TEXT = {
   en: {
-    title: 'Time Tracker for Notion',
+    title: 'Time Tracker',
     openApp: 'Signed in to Notion. Go back to Time Tracker to finish.',
     button: 'Open Time Tracker',
     expired: 'This sign-in link has expired. Start again from Time Tracker.',
     badRequest: 'Something went wrong. Start the sign-in again from Time Tracker.',
   },
   nl: {
-    title: 'Time Tracker for Notion',
+    title: 'Time Tracker',
     openApp: 'Aangemeld bij Notion. Ga terug naar Time Tracker om af te ronden.',
     button: 'Time Tracker openen',
     expired: 'Deze aanmeldlink is verlopen. Begin opnieuw vanuit Time Tracker.',
     badRequest: 'Er ging iets mis. Begin de aanmelding opnieuw vanuit Time Tracker.',
   },
   fr: {
-    title: 'Time Tracker for Notion',
+    title: 'Time Tracker',
     openApp: 'Connecté à Notion. Revenez à Time Tracker pour terminer.',
     button: 'Ouvrir Time Tracker',
     expired: 'Ce lien de connexion a expiré. Recommencez depuis Time Tracker.',
     badRequest: 'Une erreur est survenue. Recommencez la connexion depuis Time Tracker.',
   },
   de: {
-    title: 'Time Tracker for Notion',
+    title: 'Time Tracker',
     openApp: 'Bei Notion angemeldet. Kehre zu Time Tracker zurück, um abzuschließen.',
     button: 'Time Tracker öffnen',
     expired: 'Dieser Anmeldelink ist abgelaufen. Beginne erneut in Time Tracker.',
     badRequest: 'Etwas ist schiefgelaufen. Beginne die Anmeldung erneut in Time Tracker.',
   },
   es: {
-    title: 'Time Tracker for Notion',
+    title: 'Time Tracker',
     openApp: 'Sesión iniciada en Notion. Vuelve a Time Tracker para terminar.',
     button: 'Abrir Time Tracker',
     expired: 'Este enlace de inicio de sesión ha caducado. Empieza de nuevo desde Time Tracker.',
     badRequest: 'Algo salió mal. Vuelve a iniciar sesión desde Time Tracker.',
   },
   it: {
-    title: 'Time Tracker for Notion',
+    title: 'Time Tracker',
     openApp: 'Accesso a Notion effettuato. Torna a Time Tracker per completare.',
     button: 'Apri Time Tracker',
     expired: 'Questo link di accesso è scaduto. Ricomincia da Time Tracker.',

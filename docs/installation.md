@@ -49,11 +49,11 @@ Other scripts:
 | `npm run check` | Lint + unit tests + build, what CI checks first |
 | `npm run build` | Production renderer build into `windows/dist/` |
 | `npm run dist` | Build + NSIS installer into `release/` at the repo root |
-| `npm run dist:dev` | Build + installer for *Time Tracker for Notion Dev*, which installs next to the real app with its own settings |
+| `npm run dist:dev` | Build + installer for *Time Tracker Dev*, which installs next to the real app with its own settings |
 | `npm run dist:dir` | Build + unpacked app (no installer), faster for smoke tests |
 | `npm run icons` | Regenerate all icons from the vector design, including Android launcher layers |
 
-Settings are stored by electron-store in `%APPDATA%\Time Tracker for Notion\config.json` (obfuscated, with the Notion sign-in encrypted by Windows, see [decisions.md](decisions.md#api-key-handling)). The Dev app uses `%APPDATA%\Time Tracker for Notion Dev\`. Uninstalling keeps it (`deleteAppDataOnUninstall: false`).
+Settings are stored by electron-store in `%APPDATA%\Time Tracker\config.json` (obfuscated, with the Notion sign-in encrypted by Windows, see [decisions.md](decisions.md#api-key-handling)). The Dev app uses `%APPDATA%\Time Tracker Dev\`. Uninstalling keeps it (`deleteAppDataOnUninstall: false`). Up to v1.8 the app was called "Time Tracker for Notion" and used `%APPDATA%\Time Tracker for Notion\`; the first start after updating moves that folder to the new name (`electron/dataFolder.cjs`).
 
 #### Optional: mock Notion server
 
@@ -77,7 +77,7 @@ From a terminal, inside `android/`:
 ./gradlew testDebugUnitTest lintDebug   # what CI checks
 ```
 
-Debug builds have the application ID `com.impca201.notiontimetracker.debug` and the name **Time Tracker Dev**, so they install next to the released app with their own settings and Notion sign-in.
+Debug builds have the application ID `to.wim.timetracker.debug` and the name **Time Tracker Dev**, so they install next to the released app with their own settings and Notion sign-in.
 
 Use `gradlew.bat` on Windows. Android Studio writes `local.properties` with the SDK path; without it, create one with `sdk.dir=/path/to/Android/Sdk`.
 
@@ -100,7 +100,7 @@ Use `gradlew.bat` on Windows. Android Studio writes `local.properties` with the 
 - **Refuses to publish** from outside `main`, when the tag or release already exists, when the version isn't higher than the previous release, or with no commits since it.
 - **Windows job:** `npm ci`, sets the package version, lint, `npm test`, builds the installer (`dist`, or `dist:dev` for a build-only run), then installs, starts and uninstalls it with `windows/scripts/smoke-test-installer.ps1`.
 - **Android job:** decodes the keystore secret (`android/scripts/decode_keystore.py`), checks the keystore password, alias and key password (`VerifySigningKey.java`) before building, writes `android/keystore.properties`, runs the unit tests and lint, and builds with `-PappVersionName` and `-PappVersionCode`. It builds a debug APK when the secrets are missing and nothing is published.
-- **Publish job:** the only job with write access. Creates the tag and the GitHub Release with `gh release create`, attaching `Time Tracker for Notion Setup x.y.z.exe`, `TimeTracker-x.y.z.apk` and `TimeTracker-x.y.z-mapping.txt` (R8's map, to read crash stack traces from the release build).
+- **Publish job:** the only job with write access. Creates the tag and the GitHub Release with `gh release create`, attaching `Time Tracker Setup x.y.z.exe`, `TimeTracker-x.y.z.apk` and `TimeTracker-x.y.z-mapping.txt` (R8's map, to read crash stack traces from the release build).
 - **Version maths** (next version, version code, "is newer") is in `android/scripts/release_version.py`, unit tested, for both apps.
 
 Repository secrets for signing:

@@ -1,6 +1,6 @@
 # Rules for Claude Code sessions in this repository
 
-Time Tracker for Notion: a Windows desktop app (Electron, `windows/`), an Android app
+Time Tracker (published in stores as "Time Tracker for Notion"): a Windows desktop app (Electron, `windows/`), an Android app
 (`android/`) and the "Sign in with Notion" Cloudflare Worker (`worker/`) in one repository,
 built from the same rules as the `windows-electron-app` and `android-app` templates (private repositories). The owner is **not a developer
 and does not review code**. CI, tests, lint and these rules are the safety net. Follow them every
@@ -27,7 +27,7 @@ time.
    `.github/pull_request_template.md`): what changed and why, in words a non-developer
    understands, and **exactly what to click on the PC / tap on the phone to test it**, step by
    step, with what they should see. The owner tests with the files from the pull request's CI
-   run (Checks → CI → Artifacts): the Dev installer installs as "Time Tracker for Notion Dev",
+   run (Checks → CI → Artifacts): the Dev installer installs as "Time Tracker Dev",
    the debug APK as "Time Tracker Dev", each next to the real app with its own settings.
 4. **Testing on the phone or PC does not block merging.** The owner doesn't review code, so green CI is
    what a pull request needs to be merged. The owner tries the change afterwards with the test steps

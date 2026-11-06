@@ -50,7 +50,7 @@ The two codebases share no code. They agree on Notion page shapes and the sync p
 
 | Component | Package / file | Responsibility |
 |---|---|---|
-| `NotionTimeTrackerApp` | root | Creates the singletons: `SettingsRepository`, `NotionRepository`, `SettingsSyncer` |
+| `TimeTrackerApp` | root | Creates the singletons: `SettingsRepository`, `NotionRepository`, `SettingsSyncer` |
 | `NotionClient` | `data/api` | OkHttp calls, same retry policy as Windows. Request JSON keeps `null`s, because Notion reads `null` as "clear". |
 | `NotionRepository` | `data/repository` | Passes the sign-in (`NotionSession`) to every call. Caches schemas, related pages and users for 60 s, and serves stale data when a refetch fails. |
 | `SettingsRepository` | `data/repository` | DataStore `notion_settings` for workspaces and the active timer (JSON via kotlinx.serialization) and display settings. The Notion sign-in is in EncryptedSharedPreferences. |
