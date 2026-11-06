@@ -48,7 +48,7 @@ export default {
   // Notion-page sync
   labelSync: 'Synchronisatie',
   labelSyncEnabled: 'Instellingen synchroniseren tussen mijn toestellen',
-  syncHint: 'Werkruimtes, voorinstellingen en weergaveopties, bewaard op de aanmeldserver van Time Tracker onder je Notion-account.',
+  syncHint: 'Werkruimtes, voorinstellingen en weergaveopties, bewaard op de aanmeldserver van Time Tracker onder je Notion-account. Een timer die je op de pc start, toont zijn melding ook op je telefoon.',
   btnDeleteSync: 'Gesynchroniseerde instellingen verwijderen',
   confirmDeleteSync: 'De kopie op de server verwijderen en synchroniseren op dit toestel stoppen?',
   toastSyncDeleted: 'Gesynchroniseerde instellingen verwijderd. Synchroniseren staat uit op dit toestel.',

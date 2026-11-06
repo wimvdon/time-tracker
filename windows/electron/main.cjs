@@ -8,6 +8,7 @@ const notion = require('./notionClient.cjs');
 const { createTokenStore } = require('./notionTokens.cjs');
 const { createNotionSession } = require('./notionAuth.cjs');
 const { createSettingsSync, isSyncPayload } = require('./settingsSync.cjs');
+const { createTimerPush, timerChange } = require('./timerPush.cjs');
 const { APP_ORIGIN, APP_SCHEME, resolveBundlePath } = require('./bundlePath.cjs');
 const { resolveDataFolder } = require('./dataFolder.cjs');
 
@@ -128,6 +129,8 @@ const notionSession = createNotionSession({
   onChange: (reason) => mainWindow?.webContents.send('auth:changed', { account: notionSession.account(), reason }),
 });
 const settingsSync = createSettingsSync({ auth: notionSession });
+// Phones signed in to the same Notion user show the running timer (timerPush.cjs), only while sync is on.
+const timerPush = createTimerPush({ auth: notionSession, enabled: () => store.get('syncEnabled') !== false });
 
 // The UI is served from app://bundle/ instead of file:// (Electron security checklist).
 // Must be registered before the app is ready.
@@ -371,6 +374,7 @@ function applyPresetById(presetId) {
 handle('store:get', () => notionTokens.forRenderer(store.store));
 
 handle('store:set', (_event, data) => {
+  const previousTimer = store.get('activeTimer');
   for (const [key, value] of Object.entries(data)) {
     if (notionTokens.PROTECTED_FIELDS.includes(key)) {
       // Only notionTokens may write the sign-in.
@@ -382,6 +386,7 @@ handle('store:set', (_event, data) => {
       store.set(key, value);
     }
   }
+  if ('activeTimer' in data) timerPush.send(timerChange(previousTimer, store.get('activeTimer')));
   return notionTokens.forRenderer(store.store);
 });
 

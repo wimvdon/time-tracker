@@ -48,7 +48,7 @@ export default {
   // Notion-page sync
   labelSync: 'Sync',
   labelSyncEnabled: 'Sync settings between my devices',
-  syncHint: 'Workspaces, presets and display options, stored on Time Tracker’s sign-in server under your Notion account.',
+  syncHint: 'Workspaces, presets and display options, stored on Time Tracker’s sign-in server under your Notion account. A timer started on the PC also shows its notification on your phone.',
   btnDeleteSync: 'Delete synced settings',
   confirmDeleteSync: 'Delete the copy on the server and stop syncing on this device?',
   toastSyncDeleted: 'Synced settings deleted. Sync is off on this device.',

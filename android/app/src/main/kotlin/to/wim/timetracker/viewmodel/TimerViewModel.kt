@@ -936,12 +936,52 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
      */
     fun reconcileActiveTimer() {
         viewModelScope.launch {
-            val active = _uiState.value.activeTimer ?: return@launch
-            if (_uiState.value.isStopping) return@launch
-            if (settingsRepo.getActiveTimer() != null) return@launch
+            if (_uiState.value.isStopping || _uiState.value.isStarting) return@launch
+            val active = _uiState.value.activeTimer
+            val stored = settingsRepo.getActiveTimer()
+            if (active == null) {
+                // Started on Windows while this screen was away (TimerPushService stored it).
+                if (stored != null) showActiveTimerFromElsewhere(stored)
+                return@launch
+            }
+            if (stored != null) return@launch
             if (_uiState.value.activeTimer?.notionPageId != active.notionPageId) return@launch
             handleTimerStoppedFromService(active.notionPageId)
         }
+    }
+
+    /**
+     * The active timer was started or changed on another device while this screen is open
+     * (TimerPushService has stored it and shown its notification): show it here too.
+     */
+    fun onActiveTimerChangedElsewhere() {
+        viewModelScope.launch {
+            if (_uiState.value.isStopping || _uiState.value.isStarting) return@launch
+            val stored = settingsRepo.getActiveTimer() ?: return@launch
+            if (stored != _uiState.value.activeTimer) showActiveTimerFromElsewhere(stored)
+        }
+    }
+
+    private suspend fun showActiveTimerFromElsewhere(timer: ActiveTimer) {
+        // Just stopped here: its stored copy is about to be cleared, never bring it back.
+        if (recentlyStopped.containsKey(timer.notionPageId)) return
+        val workspace = _uiState.value.workspaces.firstOrNull { it.id == timer.workspaceId } ?: return
+        val startMs = RunningClock.withNewStart(timer, timer.rawStart)?.second ?: return
+        tickStartMs = startMs
+        _uiState.update { state ->
+            state.copy(
+                running = true,
+                activeTimer = timer,
+                selectedWorkspaceId = timer.workspaceId,
+                selectedProjectId = timer.projectId,
+                description = timer.description,
+                extraValues = timer.extraValues,
+                elapsedSeconds = RunningClock.elapsedSeconds(startMs, System.currentTimeMillis()),
+            )
+        }
+        startTicking(startMs)
+        loadExtraFieldDefsAndWait(workspace)
+        loadRunningTimers()
     }
 
     fun handleTimerStoppedFromService(stoppedPageId: String? = null) {

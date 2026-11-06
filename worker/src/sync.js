@@ -11,8 +11,12 @@
 // who it belongs to (/v1/users/me) and files the settings under "<workspace id>:<user id>"; the
 // token itself is never stored. An expired token gets 401, after which the app renews it.
 //
+// The same Durable Object also keeps the user's phones for timer notifications (push.js).
+//
 // Storage is a Durable Object per user (SettingsStore, SQLite-backed, set up in wrangler.toml),
 // so two devices writing at the same moment are handled one after the other.
+
+import { DEVICES_KEY, deviceOperation } from './push.js';
 
 export const NOTION_ME_URL = 'https://api.notion.com/v1/users/me';
 export const NOTION_VERSION = '2022-06-28';
@@ -87,7 +91,9 @@ export async function settingsOperation(storage, method, body) {
     return json(200, { payload: (await storage.get(STORAGE_KEY)) ?? null });
   }
   if (method === 'DELETE') {
+    // "Delete synced settings" removes everything kept for this user, the phones included.
     await storage.delete(STORAGE_KEY);
+    await storage.delete(DEVICES_KEY);
     return json(200, { deleted: true });
   }
   if (method === 'PUT') {
@@ -138,7 +144,8 @@ export class SettingsStore {
   }
 
   async fetch(request) {
-    const body = request.method === 'PUT' ? await request.json().catch(() => null) : null;
+    const body = ['PUT', 'DELETE'].includes(request.method) ? await request.json().catch(() => null) : null;
+    if (new URL(request.url).pathname === '/devices') return deviceOperation(this.storage, request.method, body);
     return settingsOperation(this.storage, request.method, body);
   }
 }

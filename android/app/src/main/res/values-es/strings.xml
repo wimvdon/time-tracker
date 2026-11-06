@@ -179,7 +179,7 @@
     <!-- Notion-page sync -->
     <string name="label_sync">Sincronización</string>
     <string name="label_sync_enabled">Sincronizar ajustes entre mis dispositivos</string>
-    <string name="sync_hint">Espacios de trabajo, preajustes y opciones de visualización, guardados en el servidor de inicio de sesión de Time Tracker con tu cuenta de Notion.</string>
+    <string name="sync_hint">Espacios de trabajo, preajustes y opciones de visualización, guardados en el servidor de inicio de sesión de Time Tracker con tu cuenta de Notion. Un temporizador iniciado en el PC también muestra su notificación en tu teléfono.</string>
     <string name="btn_delete_sync">Eliminar ajustes sincronizados</string>
     <string name="confirm_delete_sync">¿Eliminar la copia del servidor y dejar de sincronizar en este dispositivo?</string>
     <string name="toast_sync_deleted">Ajustes sincronizados eliminados. La sincronización está desactivada en este dispositivo.</string>

@@ -272,3 +272,15 @@ Merge either update only when all three CI jobs, including the installer smoke t
 ## Sign-in server address `timetracker.wim.to` (2026-11-06)
 
 The apps use `https://timetracker.wim.to` instead of `https://timetracker-signin.wim.to`; Notion's redirect URL is `https://timetracker.wim.to/callback`. The worker answers on both addresses (`worker/wrangler.toml`) and builds Notion's redirect URL from the address it is called on, so versions up to 1.8 keep signing in and syncing on the old address (Notion keeps both redirect URLs). Synced settings are stored per Notion user, not per address, so both reach the same data. Remove the old address once no device runs 1.8 or older.
+
+## Timer notifications through Firebase Cloud Messaging (2026-11-06)
+
+A timer started on Windows shows its notification on the phone (owner's request). Android has no other reliable way to wake an app in the background than a push message from Firebase Cloud Messaging (FCM), so:
+
+- **New dependencies (owner approved):** `com.google.firebase:firebase-messaging` (through the Firebase BoM 35.1.0) and Google's `com.google.gms.google-services` Gradle plugin 4.5.0, both Google's official, widely used tools. Firebase pulls in an old AndroidX Fragment (1.1) that lint rejects for `registerForActivityResult`, so `app/build.gradle.kts` requires Fragment 1.9.1 (a version constraint, not a new library). No analytics or Crashlytics: `firebase_analytics_collection_deactivated` is set, and FCM auto-init is off, so no push token exists before the app asks for one.
+- **New network access (owner approved):** the phone talks to Firebase; the worker to `oauth2.googleapis.com` and `fcm.googleapis.com`. Firebase adds the Android permissions network state, wake lock and `c2dm.permission.RECEIVE` (listed in `PRIVACY.md`).
+- **`android/app/google-services.json` is committed.** It names the Firebase project and holds a client API key that Google designs to ship inside the app: it only identifies the project and is not a secret. It has both the released and the Dev app.
+- **The worker sends the messages** with the FCM HTTP v1 API, signing a JWT with the service account key in the Cloudflare secret `FCM_SERVICE_ACCOUNT` (WebCrypto, no library). It stores only each phone's push token per Notion user (at most 10, in the same Durable Object as the synced settings, owner approved), never the timer. Without the secret it sends nothing and answers normally.
+- **Tied to settings sync, no extra switch:** with sync off, Windows sends nothing and the phone unregisters, so nothing about timers reaches the server. Deleting the synced settings also removes the phones.
+- **The phone never replaces its own timer** with one from elsewhere, and removing a notification for a timer stopped on Windows writes nothing to Notion.
+- **Only Windows → Android.** Windows has no push channel; it already notices a timer stopped on the phone with its 60-second refresh.

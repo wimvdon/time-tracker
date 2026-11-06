@@ -150,7 +150,9 @@ The installation folder is `time-tracker` for new installs, `notion-timer` when 
 |---|---|---|
 | `ACTION_VIEW` with extras `preset_workspace_id`, `preset_id` | `MainActivity` | Starts the preset (used by the dynamic launcher shortcuts, max 4) |
 | `ACTION_STOP_TIMER` | `TimerForegroundService` (not exported) | Notification **Stop** button: stops the entry in Notion |
-| Broadcast `to.wim.timetracker.TIMER_STOPPED` (extra: page id) | `MainActivity` receiver | Tells a visible UI the service stopped the timer |
+| Broadcast `to.wim.timetracker.TIMER_STOPPED` (extra: page id) | `MainActivity` receiver | Tells a visible UI the service stopped the timer (also sent when it was stopped on Windows) |
+| Broadcast `to.wim.timetracker.ACTIVE_TIMER_CHANGED` | `MainActivity` receiver | Tells a visible UI the active timer was started or changed on Windows |
+| Firebase `MESSAGING_EVENT` | `TimerPushService` (not exported) | A timer pushed from Windows (section 5) |
 
 ## 5. Sign-in server
 
@@ -164,6 +166,11 @@ The installation folder is `time-tracker` for new installs, `notion-timer` when 
 | `POST /refresh` `{refresh_token}` | Renews the tokens. 400 `{error: "invalid_grant"}` means: sign in again; 502 means Notion had trouble (the app keeps its sign-in). |
 | `GET /settings` | With `Authorization: Bearer <Notion token>`. Answers `{payload}` (`null` when nothing is stored). |
 | `PUT /settings` `{payload}` | Stores the payload if its `updatedAt` is newer than the stored one: `{accepted: true, payload}`. Otherwise 409 `{accepted: false, payload: <stored>}`, which the app applies. 400 for an invalid payload, 413 above 256 KB. |
-| `DELETE /settings` | Removes the stored payload. |
+| `DELETE /settings` | Removes the stored payload, and this user's registered phones. |
+| `PUT /devices` `{token}` | A phone registers its Firebase push token (Android, while signed in with sync on). At most 10 per user; the oldest go first. |
+| `DELETE /devices` `{token}` | Removes it (sync turned off, or sign-out). |
+| `POST /timer` `{event: "active", timer: {pageId, workspaceId, rawStart, roundedStart, description, projectId}, previousPageId}` or `{event: "stopped", pageId}` | Windows, while sync is on: passes the active timer on to every registered phone of this user as a Firebase data message (`worker/src/push.js`, `timerMessage`). Answers `{sent: <n>}`; phones Firebase reports gone are removed. Nothing is stored. |
 
-For `/settings` the server asks Notion `GET /v1/users/me` who the token belongs to (cached for 5 minutes per token hash) and uses `<workspace_id>:<owner user id>` as the key. 401 means the token is expired (the app renews it and retries); 403 means it is not a user's sign-in.
+Push message (FCM data, all values text): `type: "timer"`, `event: "active"` with `pageId`, `previousPageId` (the timer Windows switched away from, or empty), `workspaceId`, `rawStart`, `roundedStart` (ISO), `description` (at most 500 characters), `projectId`; or `event: "stopped"` with `pageId`. `active` is sent at high priority (Android only lets an app show a foreground notification from the background right after one), `stopped` at normal priority. Android reads it in `service/TimerPushService.kt` (`data/repository/RemoteTimer.kt`).
+
+For `/settings`, `/devices` and `/timer` the server asks Notion `GET /v1/users/me` who the token belongs to (cached for 5 minutes per token hash) and uses `<workspace_id>:<owner user id>` as the key. 401 means the token is expired (the app renews it and retries); 403 means it is not a user's sign-in.

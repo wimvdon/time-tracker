@@ -13,8 +13,9 @@ This is a one-time setup. Each value goes in exactly one place:
 | OAuth client ID | Notion (your public connection) | `worker/wrangler.toml` (`[vars]`): it is public |
 | OAuth client secret | Notion (your public connection) | Cloudflare, worker secret `NOTION_CLIENT_SECRET` |
 | State secret | You make it up (a long random password) | Cloudflare, worker secret `STATE_SECRET` |
+| Firebase service account key (JSON) | Firebase (section 4) | Cloudflare, worker secret `FCM_SERVICE_ACCOUNT` |
 
-The two secrets never go in the repository or in an app.
+The three secrets never go in the repository or in an app.
 
 ## 1. Notion: the public connection
 
@@ -58,6 +59,23 @@ Variables and Secrets → Add**, type **Secret**, twice:
 
 **Deploy** after adding them. Check: opening https://timetracker.wim.to/ in a browser shows
 `{"error":"not_found"}`. That means the worker runs.
+
+## 4. Firebase: timer notifications on the phone
+
+A timer started on Windows shows its notification on the phone through Firebase Cloud Messaging
+(see [architecture.md](architecture.md#timer-notifications-from-windows-on-the-phone)).
+
+1. [Firebase console](https://console.firebase.google.com) → project **Time Tracker** (Google
+   Analytics off). It has two Android apps: `to.wim.timetracker` and `to.wim.timetracker.debug`.
+   **Project settings → General → google-services.json** is `android/app/google-services.json`
+   in this repository (download it again after adding an app; it holds no secrets).
+2. **Project settings → Service accounts → Generate new private key**: a JSON file. Cloudflare →
+   the worker → **Settings → Variables and Secrets → Add**, type **Secret**, name
+   `FCM_SERVICE_ACCOUNT`, value: the whole file. Then delete the file. Without this secret
+   everything else works; phones just get no timer notifications.
+
+If the key leaks: Google Cloud console → IAM → Service accounts → that account → Keys → delete
+it, then generate a new one as above.
 
 ## If the client secret leaks
 

@@ -18,6 +18,9 @@ object DataFiles {
     /** Used only when the Android keystore fails. Never leaves this phone. */
     const val API_KEY_FALLBACK = "NotionTimeTracker_plain_fallback_prefs"
 
+    /** Which push address the sign-in server has for this phone (SharedPreferences). Never leaves this phone. */
+    const val PUSH = "push_device"
+
     /** Where DataStore keeps a file, relative to the app's files folder (backup rules use this). */
     fun dataStorePath(name: String) = "datastore/$name.preferences_pb"
 }

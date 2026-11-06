@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "407989619575",
+    "project_id": "time-tracker-45415",
+    "storage_bucket": "time-tracker-45415.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407989619575:android:6c27cd84c390c9f671af72",
+        "android_client_info": {
+          "package_name": "to.wim.timetracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbquG8_JHvG5pbLlT5Qam1K29jycet2ZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407989619575:android:4804e22650efecf371af72",
+        "android_client_info": {
+          "package_name": "to.wim.timetracker.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbquG8_JHvG5pbLlT5Qam1K29jycet2ZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,6 +4,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    // Reads app/google-services.json (the Firebase project, for timer notifications pushed from
+    // Windows; see docs/decisions.md). That file holds no secrets.
+    alias(libs.plugins.google.services)
 }
 
 // ---------------------------------------------------------------------------
@@ -158,6 +161,15 @@ dependencies {
 
     implementation(libs.okhttp)
     implementation(libs.kotlinx.serialization.json)
+
+    // Push messages from the sign-in server: a timer started on Windows shows its notification here.
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
+    constraints {
+        // Firebase (Play services) brings in Fragment 1.1, which breaks registerForActivityResult
+        // (the notification permission request); lint refuses it. Not a new library: only its version.
+        implementation(libs.androidx.fragment)
+    }
 
     testImplementation(libs.junit)
 }

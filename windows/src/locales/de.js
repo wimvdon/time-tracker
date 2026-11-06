@@ -48,7 +48,7 @@ export default {
   // Notion-page sync
   labelSync: 'Synchronisierung',
   labelSyncEnabled: 'Einstellungen zwischen meinen Geräten synchronisieren',
-  syncHint: 'Arbeitsbereiche, Vorlagen und Anzeigeoptionen, gespeichert auf dem Anmeldeserver von Time Tracker unter deinem Notion-Konto.',
+  syncHint: 'Arbeitsbereiche, Vorlagen und Anzeigeoptionen, gespeichert auf dem Anmeldeserver von Time Tracker unter deinem Notion-Konto. Ein am PC gestarteter Timer zeigt seine Benachrichtigung auch auf deinem Handy.',
   btnDeleteSync: 'Synchronisierte Einstellungen löschen',
   confirmDeleteSync: 'Die Kopie auf dem Server löschen und die Synchronisierung auf diesem Gerät beenden?',
   toastSyncDeleted: 'Synchronisierte Einstellungen gelöscht. Die Synchronisierung ist auf diesem Gerät aus.',

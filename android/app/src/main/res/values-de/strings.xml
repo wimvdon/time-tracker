@@ -179,7 +179,7 @@
     <!-- Notion-page sync -->
     <string name="label_sync">Synchronisierung</string>
     <string name="label_sync_enabled">Einstellungen zwischen meinen Geräten synchronisieren</string>
-    <string name="sync_hint">Arbeitsbereiche, Vorlagen und Anzeigeoptionen, gespeichert auf dem Anmeldeserver von Time Tracker unter deinem Notion-Konto.</string>
+    <string name="sync_hint">Arbeitsbereiche, Vorlagen und Anzeigeoptionen, gespeichert auf dem Anmeldeserver von Time Tracker unter deinem Notion-Konto. Ein am PC gestarteter Timer zeigt seine Benachrichtigung auch auf deinem Handy.</string>
     <string name="btn_delete_sync">Synchronisierte Einstellungen löschen</string>
     <string name="confirm_delete_sync">Die Kopie auf dem Server löschen und die Synchronisierung auf diesem Gerät beenden?</string>
     <string name="toast_sync_deleted">Synchronisierte Einstellungen gelöscht. Die Synchronisierung ist auf diesem Gerät aus.</string>
