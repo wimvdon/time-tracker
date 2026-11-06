@@ -23,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import to.wim.timetracker.service.TimerForegroundService
+import to.wim.timetracker.service.TimerPushService
 import to.wim.timetracker.ui.screens.SettingsScreen
 import to.wim.timetracker.ui.screens.TimerScreen
 import to.wim.timetracker.ui.theme.Motion
@@ -48,9 +49,12 @@ class MainActivity : ComponentActivity() {
 
     private val timerStoppedReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent?.action == TimerForegroundService.ACTION_TIMER_STOPPED) {
-                val stoppedPageId = intent?.getStringExtra(TimerForegroundService.EXTRA_PAGE_ID)
-                timerViewModel.handleTimerStoppedFromService(stoppedPageId)
+            when (intent?.action) {
+                TimerForegroundService.ACTION_TIMER_STOPPED -> {
+                    val stoppedPageId = intent.getStringExtra(TimerForegroundService.EXTRA_PAGE_ID)
+                    timerViewModel.handleTimerStoppedFromService(stoppedPageId)
+                }
+                TimerPushService.ACTION_ACTIVE_TIMER_CHANGED -> timerViewModel.onActiveTimerChangedElsewhere()
             }
         }
     }
@@ -115,7 +119,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        val filter = IntentFilter(TimerForegroundService.ACTION_TIMER_STOPPED)
+        val filter = IntentFilter(TimerForegroundService.ACTION_TIMER_STOPPED).apply {
+            addAction(TimerPushService.ACTION_ACTIVE_TIMER_CHANGED)
+        }
         ContextCompat.registerReceiver(this, timerStoppedReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED)
         timerViewModel.refreshSettings()
         timerViewModel.reconcileActiveTimer()

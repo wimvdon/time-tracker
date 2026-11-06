@@ -179,7 +179,7 @@
     <!-- Notion-page sync -->
     <string name="label_sync">Sync</string>
     <string name="label_sync_enabled">Sync settings between my devices</string>
-    <string name="sync_hint">Workspaces, presets and display options, stored on Time Tracker’s sign-in server under your Notion account.</string>
+    <string name="sync_hint">Workspaces, presets and display options, stored on Time Tracker’s sign-in server under your Notion account. A timer started on the PC also shows its notification on your phone.</string>
     <string name="btn_delete_sync">Delete synced settings</string>
     <string name="confirm_delete_sync">Delete the copy on the server and stop syncing on this device?</string>
     <string name="toast_sync_deleted">Synced settings deleted. Sync is off on this device.</string>

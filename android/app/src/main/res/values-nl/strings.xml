@@ -179,7 +179,7 @@
     <!-- Notion-page sync -->
     <string name="label_sync">Synchronisatie</string>
     <string name="label_sync_enabled">Instellingen synchroniseren tussen mijn toestellen</string>
-    <string name="sync_hint">Werkruimtes, voorinstellingen en weergaveopties, bewaard op de aanmeldserver van Time Tracker onder je Notion-account.</string>
+    <string name="sync_hint">Werkruimtes, voorinstellingen en weergaveopties, bewaard op de aanmeldserver van Time Tracker onder je Notion-account. Een timer die je op de pc start, toont zijn melding ook op je telefoon.</string>
     <string name="btn_delete_sync">Gesynchroniseerde instellingen verwijderen</string>
     <string name="confirm_delete_sync">De kopie op de server verwijderen en synchroniseren op dit toestel stoppen?</string>
     <string name="toast_sync_deleted">Gesynchroniseerde instellingen verwijderd. Synchroniseren staat uit op dit toestel.</string>

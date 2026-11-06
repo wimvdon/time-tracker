@@ -179,7 +179,7 @@
     <!-- Notion-page sync -->
     <string name="label_sync">Synchronisation</string>
     <string name="label_sync_enabled">Synchroniser les paramètres entre mes appareils</string>
-    <string name="sync_hint">Espaces de travail, préréglages et options d’affichage, stockés sur le serveur de connexion de Time Tracker sous votre compte Notion.</string>
+    <string name="sync_hint">Espaces de travail, préréglages et options d’affichage, stockés sur le serveur de connexion de Time Tracker sous votre compte Notion. Un minuteur lancé sur le PC affiche aussi sa notification sur votre téléphone.</string>
     <string name="btn_delete_sync">Supprimer les paramètres synchronisés</string>
     <string name="confirm_delete_sync">Supprimer la copie sur le serveur et arrêter la synchronisation sur cet appareil ?</string>
     <string name="toast_sync_deleted">Paramètres synchronisés supprimés. La synchronisation est désactivée sur cet appareil.</string>

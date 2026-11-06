@@ -156,6 +156,36 @@ and device-only settings (always on top, start with Windows, Android dynamic col
 are never synced. The Notion sync page of earlier versions is no longer read; its settings
 (`syncPageId`, …) are deleted on start.
 
+### Timer notifications from Windows on the phone
+
+While settings sync is on, a timer started, edited or stopped on Windows shows, updates or removes
+the running-timer notification on the phones signed in to the same Notion user, through Firebase
+Cloud Messaging (requests and message: [api.md](api.md#5-sign-in-server)).
+
+```
+ Windows (store:set activeTimer)       Sign-in server                Firebase        Phone
+  │── POST /timer {active|stopped} ──►│ who? (Notion)                  │               │
+  │                                   │── per registered phone ──────►│── data msg ──►│ TimerPushService
+  │                                   │   (Google access token from   │               │  RemoteTimer.decide
+  │                                   │    FCM_SERVICE_ACCOUNT)       │               │  → notification
+```
+
+- **Windows** (`electron/timerPush.cjs`): every save of `activeTimer` goes through `store:set`;
+  `timerChange` turns the old and new value into *active* (start, new start time, description,
+  project, switching timers) or *stopped*, and sends it in order, fire and forget.
+- **Phone registration** (`PushRegistrar`): signed in with sync on → Firebase is asked for a push
+  token (auto-init is off, so none exists before) and `PUT /devices`; sync off or sign-out →
+  `DELETE /devices` and the token is deleted. At every app start and after each sign-in.
+- **Phone** (`TimerPushService`, `RemoteTimer`): follows the other device's timer while it has
+  none of its own or was already showing that one (or the one Windows switched away from); a timer
+  started on the phone is never replaced. *Active* stores it as the active timer and starts the
+  notification service; *stopped* clears it and removes the notification without writing to
+  Notion. Stopping it from the phone's notification works as for its own timers (same workspace
+  properties). An open timer screen follows through a broadcast; one opened later reads the stored
+  timer.
+- **Not guaranteed**: needs Google Play services, and a phone that was off or force-stopped
+  catches up through the normal refresh when the app opens.
+
 ## Patterns used
 
 - **Thin client, small backend.** Each user's own sign-in talks to their own workspace; the worker only swaps codes, renews tokens and keeps the synced settings.
@@ -173,6 +203,7 @@ are never synced. The Notion sync page of earlier versions is no longer read; it
 | Workspaces, presets, active timer, preferences | electron-store `config.json` | DataStore `notion_settings` (JSON strings for structured values). Backed up. |
 | Time entries | Notion | Notion |
 | Shared settings | Sync server (`worker/`), one copy per Notion user | same |
+| Push token for timer notifications | — | Firebase's own files; which token the server has in SharedPreferences `push_device`. Never backed up. On the server: the token per Notion user (`devices`). |
 | Sync on or off | electron-store `syncEnabled` | DataStore `sync_enabled` |
 
 **Android backup.** Android's own backup (to the Google account) and phone-to-phone transfer copy

@@ -48,7 +48,7 @@ export default {
   // Notion-page sync
   labelSync: 'Sincronización',
   labelSyncEnabled: 'Sincronizar ajustes entre mis dispositivos',
-  syncHint: 'Espacios de trabajo, preajustes y opciones de visualización, guardados en el servidor de inicio de sesión de Time Tracker con tu cuenta de Notion.',
+  syncHint: 'Espacios de trabajo, preajustes y opciones de visualización, guardados en el servidor de inicio de sesión de Time Tracker con tu cuenta de Notion. Un temporizador iniciado en el PC también muestra su notificación en tu teléfono.',
   btnDeleteSync: 'Eliminar ajustes sincronizados',
   confirmDeleteSync: '¿Eliminar la copia del servidor y dejar de sincronizar en este dispositivo?',
   toastSyncDeleted: 'Ajustes sincronizados eliminados. La sincronización está desactivada en este dispositivo.',

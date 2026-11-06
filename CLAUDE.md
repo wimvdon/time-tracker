@@ -44,8 +44,9 @@ time.
   Content Security Policy (`windows/vite.config.js`), navigation/permission blocking and the
   `isTrustedSender` IPC check in `windows/electron/main.cjs`, or the Electron fuses in
   `windows/package.json`.
-- Add network access beyond the Notion API (`api.notion.com`) and the sign-in server
-  (`timetracker.wim.to`, `worker/`), telemetry, analytics, crash
+- Add network access beyond the Notion API (`api.notion.com`), the sign-in server
+  (`timetracker.wim.to`, `worker/`) and Firebase Cloud Messaging for timer notifications only
+  (Android app and worker, see `docs/decisions.md`), telemetry, analytics, crash
   reporting or ads, or Android permissions beyond the ones in `PRIVACY.md`.
 - Add dependencies (npm packages, libraries or Gradle plugins). Prefer what is already there.
   If one is needed, say why and check it is widely used and maintained.

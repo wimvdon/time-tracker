@@ -200,7 +200,10 @@ class SettingsViewModel(private val app: Application) : AndroidViewModel(app) {
     fun signInUrl(): String = session.beginSignIn(AuthServer.platform(app.packageName))
 
     fun signOut() {
+        val previousToken = session.token()
         session.signOut()
+        val timeTracker = app as TimeTrackerApp
+        timeTracker.appScope.launch { runCatching { timeTracker.pushRegistrar.signedOut(previousToken) } }
         _uiState.update { it.copy(snackbarMessage = "signed_out") }
     }
 
@@ -440,6 +443,7 @@ class SettingsViewModel(private val app: Application) : AndroidViewModel(app) {
         _uiState.update { it.copy(syncEnabled = enabled, syncError = null) }
         viewModelScope.launch {
             settingsRepo.saveSyncEnabled(enabled)
+            (app as TimeTrackerApp).updatePushRegistration()
             if (enabled) syncNow()
         }
     }
@@ -449,6 +453,7 @@ class SettingsViewModel(private val app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             try {
                 syncer.deleteFromServer()
+                (app as TimeTrackerApp).updatePushRegistration()
                 _uiState.update { it.copy(syncEnabled = false, syncError = null, snackbarMessage = "sync_deleted") }
             } catch (e: Exception) {
                 _uiState.update { it.copy(snackbarMessage = e.message) }

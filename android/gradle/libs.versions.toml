@@ -13,6 +13,9 @@ materialIcons = "1.7.8"
 okhttp = "5.5.0"
 junit = "4.13.2"
 serialization = "1.11.0"
+firebaseBom = "35.1.0"
+fragment = "1.9.1"
+googleServices = "4.5.0"
 
 [libraries]
 androidx-graphics-shapes = { group = "androidx.graphics", name = "graphics-shapes", version.ref = "graphicsShapes" }
@@ -29,6 +32,9 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-compose-material-icons = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIcons" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
+androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
@@ -36,3 +42,4 @@ kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-p
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
