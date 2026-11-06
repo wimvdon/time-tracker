@@ -26,7 +26,7 @@
     "@eslint/js": "^10.0.1",
     "@fluentui/react-icons": "^2.0.330",
     "@tailwindcss/vite": "^4.0.0",
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^6.1.2",
     "concurrently": "^9.0.0",
     "cross-env": "^10.0.0",
     "electron": "^44.7.0",
