@@ -899,10 +899,13 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
 
     fun updateStartTime(newStartISO: String) {
         val timer = _uiState.value.activeTimer ?: return
-        val parsedMs = runCatching { parseIso(newStartISO) }.getOrNull() ?: return
-        val updated = timer.copy(roundedStart = newStartISO, rawStart = newStartISO)
+        val (updated, parsedMs) = RunningClock.withNewStart(timer, newStartISO) ?: return
         tickStartMs = parsedMs
-        _uiState.update { it.copy(activeTimer = updated) }
+        _uiState.update { it.copy(activeTimer = updated, elapsedSeconds = RunningClock.elapsedSeconds(parsedMs, System.currentTimeMillis())) }
+        // The on-screen counter and the notification count from the start they were given,
+        // so restart the counter and tell the notification (its Stop writes the end time).
+        startTicking(parsedMs)
+        syncServiceNotifications()
         viewModelScope.launch {
             settingsRepo.saveActiveTimer(updated)
             if (timer.propertyMap.timeEntryDateProp.isBlank()) return@launch
@@ -1480,8 +1483,8 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
         tickJob?.cancel()
         tickJob = viewModelScope.launch {
             while (true) {
-                val elapsed = (System.currentTimeMillis() - startMs) / 1000L
-                _uiState.update { it.copy(elapsedSeconds = elapsed.coerceAtLeast(0L)) }
+                val elapsed = RunningClock.elapsedSeconds(startMs, System.currentTimeMillis())
+                _uiState.update { it.copy(elapsedSeconds = elapsed) }
                 delay(1000L)
             }
         }
