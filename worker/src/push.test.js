@@ -136,12 +136,12 @@ test('a started timer reaches every phone of that Notion user, and only theirs',
   assert.equal(services.sent[0].android.priority, 'HIGH');
 });
 
-test('a stopped timer is sent at normal priority', async () => {
+test('a stopped timer is sent at high priority too, so it is not held back behind the next start', async () => {
   const services = fakeServices();
   await call('PUT', '/devices', 'tok-alice', { token: 'phone-a' }, services.fetchImpl);
   await call('POST', '/timer', 'tok-alice', { event: 'stopped', pageId: 'page-1' }, services.fetchImpl);
   assert.deepEqual(services.sent[0].data, { type: 'timer', event: 'stopped', pageId: 'page-1' });
-  assert.equal(services.sent[0].android.priority, 'NORMAL');
+  assert.equal(services.sent[0].android.priority, 'HIGH');
 });
 
 test('registering the same phone twice keeps it once', async () => {

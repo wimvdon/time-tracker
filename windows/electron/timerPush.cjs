@@ -58,12 +58,25 @@ function createTimerPush({ auth, enabled, serverUrl = AUTH_SERVER_URL, fetchImpl
 
   // One at a time and in order, so a quick start-then-stop never reaches the phone reversed.
   let queue = Promise.resolve();
+  // The timer stopped last, until the next one starts. Android doesn't promise to deliver push
+  // messages in order, so a new timer names it as the one it replaces: a phone still showing the
+  // stopped timer (its "stopped" not in yet) then follows the new one instead of ignoring it.
+  let lastStoppedPageId = '';
 
   return {
     /** Passes on one change; resolves to whether the server took it (never rejects). */
     send(change) {
       if (!change || !enabled()) return Promise.resolve(false);
-      queue = queue.then(() => post(change).catch(() => false));
+      let message = change;
+      if (change.event === 'stopped') {
+        lastStoppedPageId = change.pageId;
+      } else if (change.event === 'active') {
+        if (!change.previousPageId && lastStoppedPageId && lastStoppedPageId !== change.timer.pageId) {
+          message = { ...change, previousPageId: lastStoppedPageId };
+        }
+        lastStoppedPageId = '';
+      }
+      queue = queue.then(() => post(message).catch(() => false));
       return queue;
     },
   };

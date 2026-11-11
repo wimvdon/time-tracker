@@ -127,3 +127,17 @@ test('changes go out one at a time, in order', async () => {
   await Promise.all([a, b]);
   assert.deepEqual(order, ['active', 'stopped']);
 });
+
+test('a timer started after a stop names the stopped one, so a phone still showing it follows', async () => {
+  const s = server();
+  const push = createTimerPush({ auth: auth('tok'), enabled: () => true, serverUrl: SERVER, fetchImpl: s.fetchImpl });
+  await push.send({ event: 'stopped', pageId: 'page-0' });
+  await push.send({ event: 'active', timer: timer(), previousPageId: '' });
+  await push.send({ event: 'stopped', pageId: 'page-1' });
+  await push.send({ event: 'active', timer: timer({ pageId: 'page-2' }), previousPageId: 'page-x' });
+  await push.send({ event: 'active', timer: timer({ pageId: 'page-3' }), previousPageId: '' });
+  assert.deepEqual(
+    s.calls.map((c) => c.body.previousPageId),
+    [undefined, 'page-0', undefined, 'page-x', ''],
+  );
+});
