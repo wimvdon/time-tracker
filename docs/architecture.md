@@ -173,11 +173,14 @@ Cloud Messaging (requests and message: [api.md](api.md#5-sign-in-server)).
 - **Windows** (`electron/timerPush.cjs`): every save of `activeTimer` goes through `store:set`;
   `timerChange` turns the old and new value into *active* (start, new start time, description,
   project, switching timers) or *stopped*, and sends it in order, fire and forget.
+  Push messages can arrive out of order on the phone, so a timer started right after a stop names
+  the stopped one as the timer it replaces (`previousPageId`), and stops go at high priority like
+  starts (a dozing phone holds normal-priority messages back).
 - **Phone registration** (`PushRegistrar`): signed in with sync on → Firebase is asked for a push
   token (auto-init is off, so none exists before) and `PUT /devices`; sync off or sign-out →
   `DELETE /devices` and the token is deleted. At every app start and after each sign-in.
 - **Phone** (`TimerPushService`, `RemoteTimer`): follows the other device's timer while it has
-  none of its own or was already showing that one (or the one Windows switched away from); a timer
+  none of its own or was already showing that one (or the one Windows switched away from or stopped just before); a timer
   started on the phone is never replaced. *Active* stores it as the active timer and starts the
   notification service; *stopped* clears it and removes the notification without writing to
   Notion. Stopping it from the phone's notification works as for its own timers (same workspace

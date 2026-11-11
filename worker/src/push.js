@@ -131,8 +131,9 @@ export async function handleTimer(request, env, fetchImpl = fetch) {
     return json(502, { error: 'push_unavailable' });
   }
   // Showing the notification starts a foreground service in the background, which Android only
-  // allows right after a high-priority message. Removing it needs no such exception.
-  const priority = message.event === 'active' ? 'HIGH' : 'NORMAL';
+  // allows right after a high-priority message. A stop goes at high priority too: at normal
+  // priority a dozing phone holds it back, so it would arrive after the next timer's start.
+  const priority = 'HIGH';
   const results = await Promise.all(
     devices.map((deviceToken) =>
       sendToDevice({ account, accessToken: token, deviceToken, data: message, priority }, fetchImpl).catch(() => 'failed'),
