@@ -10,7 +10,7 @@ import androidx.core.graphics.ColorUtils
 // use on the light theme's near-white background, one for the dark theme's
 // near-black background. Hue/saturation are preserved; lightness is only
 // nudged when the original color wouldn't meet ~3:1 contrast (WCAG's
-// non-text/UI-component minimum — enough to stay legible without pulling
+// non-text/UI-component minimum, enough to stay legible without pulling
 // saturated colors like yellow so dark they read as brown).
 
 private const val MIN_CONTRAST = 3.0

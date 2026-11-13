@@ -16,7 +16,7 @@ class NotionRepository(
     //
     // Database schemas, related-database entries and the user list describe the
     // Notion setup, not the time entries themselves, so they barely change while
-    // the app is open — but they were refetched on every single workspace switch.
+    // the app is open, but they were refetched on every single workspace switch.
     // That both slowed switching down and made bursts of calls run into Notion's
     // rate limit, which surfaced as fields with no options (or no fields at all).
     // Entries are served from cache while fresh, and a stale copy is still served
@@ -50,7 +50,7 @@ class NotionRepository(
         }
     }
 
-    /** Drops every cached schema/option list — call after signing in again or
+    /** Drops every cached schema/option list. Call after signing in again or
      *  a workspace's database configuration is edited. */
     suspend fun invalidateMetadataCache() {
         cacheMutex.withLock {

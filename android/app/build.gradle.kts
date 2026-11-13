@@ -9,21 +9,17 @@ plugins {
     alias(libs.plugins.google.services)
 }
 
-// ---------------------------------------------------------------------------
-// App identity: the ONE place to change the package / application ID. Phones treat a
+// App identity: the only place to change the package / application ID. Phones treat a
 // different ID as a different app (no update, no data carried over), so never change it
 // again. It was com.impca201.notiontimetracker up to v1.8.x (see docs/decisions.md).
-// ---------------------------------------------------------------------------
 val appId = "to.wim.timetracker"
 
-// ---------------------------------------------------------------------------
 // Versioning
 //  - Release builds: the release workflow passes -PappVersionName=X.Y.Z and
 //    -PappVersionCode=N (N = major*10000 + minor*100 + patch).
 //  - Every other build: version comes from `git describe --tags --long`, e.g.
 //    1.2.0-3-gabc1234, so a dev build never looks like a release.
 //    Falls back to 0.0.0-dev when there are no tags or no git.
-// ---------------------------------------------------------------------------
 val releaseVersionName: String? = providers.gradleProperty("appVersionName").orNull
 val releaseVersionCode: String? = providers.gradleProperty("appVersionCode").orNull
 
@@ -64,10 +60,8 @@ val appVersion: AppVersion =
         AppVersion(gitDescribeVersion(), 1)
     }
 
-// ---------------------------------------------------------------------------
 // Release signing: only when keystore.properties exists. The release workflow
 // writes it at build time and deletes it afterwards. Never commit it.
-// ---------------------------------------------------------------------------
 val keystorePropertiesFile = rootProject.file("keystore.properties")
 val keystoreProperties =
     Properties().apply {

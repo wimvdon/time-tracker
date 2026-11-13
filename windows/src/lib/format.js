@@ -26,7 +26,7 @@ export const DATE_FORMATS = ['DD/MM/YYYY', 'MM/DD/YYYY', 'YYYY-MM-DD'];
 /**
  * The page title written to Notion when the description is left empty: the
  * entry's own start date, in the format chosen in Settings. The description
- * input itself is never pre-filled with it — the fallback only ever exists on
+ * input itself is never pre-filled with it; the fallback only ever exists on
  * the Notion page.
  */
 export function fallbackDescription(date, dateFormat = 'DD/MM/YYYY') {

@@ -2,7 +2,7 @@
 // use on the light theme's near-white background and one for the dark
 // theme's near-black background. Hue/saturation are preserved; lightness is
 // only nudged when the original color wouldn't meet ~3:1 contrast (WCAG's
-// non-text/UI-component minimum — enough to stay legible without pulling
+// non-text/UI-component minimum, enough to stay legible without pulling
 // saturated colors like yellow so dark they read as brown).
 
 const LIGHT_BG_LUMINANCE = 1; // page background in light theme (white)

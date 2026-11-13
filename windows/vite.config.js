@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 
-// Inject a strict CSP into the production build only — in dev mode Vite's HMR
+// Inject a strict CSP into the production build only; in dev mode Vite's HMR
 // needs inline scripts and websockets, which this policy would block.
 const cspPlugin = () => ({
   name: 'inject-csp',

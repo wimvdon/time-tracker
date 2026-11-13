@@ -615,7 +615,7 @@ export const useStore = create((set, get) => ({
 
     // The field definitions decide which extra properties get written, so a
     // start fired while they are still loading (preset, tray/shortcut, recent
-    // entry "play") waits for them — otherwise every extra value is silently
+    // entry "play") waits for them; otherwise every extra value is silently
     // dropped from the new entry.
     await waitForExtraFields(get);
     const state = get();
@@ -727,7 +727,7 @@ export const useStore = create((set, get) => ({
   /**
    * "Play" on a recent entry: starts a new timer in the same workspace, with
    * the same description, connected project and extra field values as that
-   * entry — but starting now, with no end. Mirrors applyPreset's flow, except
+   * entry, but starting now, with no end. Mirrors applyPreset's flow, except
    * the project/extra values are read from the source Notion page (its own
    * schema-backed source of truth) rather than from a saved preset.
    */
@@ -766,7 +766,7 @@ export const useStore = create((set, get) => ({
         }
         set({ selectedProjectId: projectId, extraValues });
       } catch {
-        // Fall back to whatever selectWorkspace() already set (empty/active values) —
+        // Fall back to whatever selectWorkspace() already set (empty/active values),
         // the timer can still be started, just without the restored project/extras.
       }
 
@@ -888,7 +888,7 @@ export const useStore = create((set, get) => ({
   /**
    * Stops the currently active timer's Notion page and clears the local
    * "active" slot (tray reset to idle). Does not touch `runningTimers` or
-   * decide what happens next — callers do that (promote another running
+   * decide what happens next; callers do that (promote another running
    * timer, leave idle, or immediately start a new one). Returns true on
    * success, false if the write failed (a toast/dialog is shown either way).
    */
@@ -1021,7 +1021,7 @@ export const useStore = create((set, get) => ({
       const stillRunning = visibleRunning.some((rt) => rt.pageId === activeTimer.notionPageId);
       if (failedWorkspaceIds.has(activeTimer.workspaceId) || wasJustStarted(activeTimer.notionPageId)) {
         // Couldn't check, or Notion's query hasn't caught up with a timer
-        // started here yet — keep it running until the next refresh.
+        // started here yet, keep it running until the next refresh.
       } else if (!stillRunning) {
         clearInterval(activeTimer.tickInterval);
         api.saveSettings({ activeTimer: null });
@@ -1115,7 +1115,7 @@ export const useStore = create((set, get) => ({
       clearInterval(state.timer.tickInterval);
     }
 
-    // Only switch workspace when actually needed — avoids resetting extraFieldDefs/extraValues
+    // Only switch workspace when actually needed; this avoids resetting extraFieldDefs/extraValues
     if (state.selectedWorkspaceId !== rt.workspaceId) {
       await get().selectWorkspace(rt.workspaceId);
     }
@@ -1179,7 +1179,7 @@ export const useStore = create((set, get) => ({
         projectName = pages.find((p) => p.id === projectId)?.name ?? '';
       }
 
-      // Don't rely on the store's extraFieldDefs — it may still belong to a
+      // Don't rely on the store's extraFieldDefs; it may still belong to a
       // different workspace or not have finished loading yet. Fetch the live
       // schema directly, same as loadExtraFields does, to get the real type
       // for each configured extra field.
@@ -1210,7 +1210,7 @@ export const useStore = create((set, get) => ({
         },
       });
     } catch {
-      // Keep whatever values were already loaded on failure — the timer itself
+      // Keep whatever values were already loaded on failure; the timer itself
       // is already usable.
     }
   },
@@ -1343,7 +1343,7 @@ export const useStore = create((set, get) => ({
     const pm = state.timer.propertyMap;
     // The description may be cleared; the page itself never gets an empty title
     // (that shows up as "Untitled" in Notion), so it falls back to the entry's
-    // start date — same as when the timer was started without a description.
+    // start date, same as when the timer was started without a description.
     const newDescription = description.trim();
     const startDate = state.timer.rawStart
       ? new Date(state.timer.rawStart)
@@ -1357,7 +1357,7 @@ export const useStore = create((set, get) => ({
       };
     }
     // The timer view has no project picker, so a null projectId means "not
-    // known on this device", not "cleared" — writing an empty relation here
+    // known on this device", not "cleared"; writing an empty relation here
     // wiped the page's project link on every description/extra-field save.
     // When the same property is configured as an extra field, that field is
     // the single source of truth. (Same rules as the Android app.)
@@ -1485,7 +1485,7 @@ function applySyncPayload(set, get, payload) {
   if (payload.timeFormat !== undefined) patch.timeFormat = payload.timeFormat;
   if (payload.showNotionLink !== undefined) patch.showNotionLink = payload.showNotionLink;
   if (payload.showArchiveAction !== undefined) patch.showArchiveAction = payload.showArchiveAction;
-  // A pulled payload can carry different workspaces, presets and language —
+  // A pulled payload can carry different workspaces, presets and language,
   // all three are baked into the tray menu, so it is rebuilt once the main
   // process has the new values on disk.
   Promise.resolve(api.saveSettings(patch)).then(() => api.notifySettingsChanged?.());

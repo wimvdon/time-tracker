@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Time Tracker</string>
 
-    <!-- Timer — idle -->
+    <!-- Timer: idle -->
     <string name="label_workspace">Espacio de trabajo</string>
     <string name="label_description">Trabajando en…</string>
     <string name="placeholder_description">Descripción</string>

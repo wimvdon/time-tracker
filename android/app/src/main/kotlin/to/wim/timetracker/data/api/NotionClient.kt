@@ -41,7 +41,7 @@ class NotionClient {
      * 429 once that is exceeded. Loading a workspace's fields fires several calls
      * at once (schema, related-database pages, users) on top of the running-timer
      * and recent-entry queries for every workspace, so a burst can easily hit that
-     * ceiling. Retrying here — honouring Retry-After — keeps a throttled call from
+     * ceiling. Retrying here (honouring Retry-After) keeps a throttled call from
      * surfacing as an empty schema or an empty option list further up.
      */
     private val maxAttempts = 4
@@ -263,7 +263,7 @@ class NotionClient {
                 val propsObj = page.objOrNull("properties") ?: return@forEach
                 val title = titleOf(propsObj, fallback = "Untitled")
                 // An entry with no start (its date was never set, or was cleared in
-                // Notion) has no elapsed time to show, so it is skipped — but only
+                // Notion) has no elapsed time to show, so it is skipped, but only
                 // it: the rest of the query's entries are still returned.
                 val startISO = if (dateProp.isNotBlank())
                     propsObj.objOrNull(dateProp)?.objOrNull("date")?.stringOrNull("start")

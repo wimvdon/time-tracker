@@ -118,6 +118,7 @@ export default function Timer() {
       <button
         onClick={refreshAll}
         title={t('btnRefreshAll')}
+        aria-label={t('btnRefreshAll')}
         className="text-fg3 hover:text-fg1 transition-colors flex items-center justify-center"
       >
         <ArrowClockwise20Regular className={`w-5 h-5 ${runningTimersLoading || recentEntriesLoading ? 'animate-spin' : ''}`} />
@@ -126,6 +127,7 @@ export default function Timer() {
         <button
           onClick={onPlusButtonClicked}
           title={t('titleStartNewTimer')}
+          aria-label={t('titleStartNewTimer')}
           className="text-fg3 hover:text-fg1 transition-colors flex items-center justify-center"
         >
           <Add20Regular className="w-5 h-5" />
@@ -182,7 +184,7 @@ export default function Timer() {
     // ---- Idle state ----
     const canStart = signedIn && !!selectedWorkspaceId && !extrasLoading && !isStarting;
     // Like required extra fields, a required description is enforced when the
-    // timer is stopped — starting stays a single click.
+    // timer is stopped; starting stays a single click.
     const descriptionRequired = !!selectedWorkspace?.descriptionRequired;
     const descriptionMissing = descriptionRequired && !description.trim();
 
@@ -484,8 +486,8 @@ function RunningView({
   const isDarkTheme = useIsDarkTheme();
   const accentColor = workspaceColor ? getWorkspaceAccentColor(workspaceColor, isDarkTheme) : null;
 
-  // <input type="time"> only accepts a 24-hour "HH:MM" value — it renders blank
-  // for anything else — so the value stays 24-hour whatever the display format
+  // <input type="time"> only accepts a 24-hour "HH:MM" value; it renders blank
+  // for anything else, so the value stays 24-hour whatever the display format
   // is. The browser presents it in the OS's own 12/24-hour convention.
   const [startInput, setStartInput] = useState(() => formatHHMM(new Date(timer.roundedStart)));
   const [endInput, setEndInput] = useState('');
@@ -574,7 +576,7 @@ function RunningView({
   }, []);
 
   // Extra field values (e.g. connected project) can arrive asynchronously
-  // shortly after a running timer is loaded — re-sync the draft once they do.
+  // shortly after a running timer is loaded; re-sync the draft once they do.
   useEffect(() => {
     if (pendingExtrasRef.current) return;
     setLocalExtras({ ...extraValues });
@@ -1203,7 +1205,7 @@ function RunningTimerItem({ rt, isActive, onLoad, onStop, onDelete, onOpenUrl })
   );
 }
 
-/** Quick-start preset chips — shown when an API key is set and any workspace
+/** Quick-start preset chips, shown when an API key is set and any workspace
  *  has presets, in both the idle form and the running view. Clicking one while a timer is already
  *  running goes through `applyPreset`'s "already running" confirmation. */
 function PresetChips({ workspaces, signedIn, onApplyPreset, onManageClick, onNewClick, className = '' }) {
@@ -1253,6 +1255,7 @@ function PresetChips({ workspaces, signedIn, onApplyPreset, onManageClick, onNew
       <button
         onClick={onManageClick}
         title={t('presetsManageTitle')}
+        aria-label={t('presetsManageTitle')}
         className="p-1 text-fg3 hover:text-fg1 hover:bg-subtle-hover rounded-full transition-colors flex items-center justify-center text-sm"
       >
         <Edit20Regular className="w-4 h-4" />

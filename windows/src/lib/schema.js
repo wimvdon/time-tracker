@@ -1,6 +1,6 @@
 /**
  * Pure helpers for the raw schema object returned by getDatabaseSchema.
- * No API calls here — only data transformation.
+ * No API calls here: only data transformation.
  */
 
 /**
