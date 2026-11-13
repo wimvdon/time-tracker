@@ -213,8 +213,8 @@ export default function Timer() {
               disabled={!canStart || isStarting}
               className={`w-full h-10 rounded-md font-semibold text-base transition-colors flex items-center justify-center ${
                 selectedWorkspace?.color
-                  ? 'text-white hover:brightness-110 active:brightness-90 disabled:bg-control-disabled disabled:text-fg-disabled'
-                  : 'bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white disabled:bg-control-disabled disabled:text-fg-disabled'
+                  ? 'text-white hover:brightness-95 active:brightness-90 disabled:bg-control-disabled disabled:text-fg-disabled'
+                  : 'bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white disabled:bg-control-disabled disabled:text-fg-disabled'
               }`}
               style={
                 selectedWorkspace?.color && canStart && !isStarting
@@ -670,7 +670,7 @@ function RunningView({
           <button
             onClick={() => handleStop()}
             disabled={isStopping || flushingStop}
-            className="w-full h-10 rounded-md bg-red-600 hover:bg-red-500 active:bg-red-700 text-white font-semibold text-base transition-colors flex items-center justify-center disabled:opacity-50"
+            className="w-full h-10 rounded-md bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-semibold text-base transition-colors flex items-center justify-center disabled:opacity-50"
           >
             {isStopping || flushingStop ? (
               <span className="animate-spin inline-block w-5 h-5 border-2 border-current border-t-transparent rounded-full" />

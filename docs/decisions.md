@@ -13,6 +13,12 @@ From an antislop accessibility pass, run against the Windows app in a browser.
   times). Dark mode's was already 5.7:1.
 - **Windows: icon buttons are at least 28 px and named.** Refresh and Settings were 20 px (WCAG 2.2
   asks for 24), and the Settings back arrow was read out as "left arrow"; it is now "Back".
+- **Start and Stop labels reach 4.5:1 on both apps.** A workspace colour behind white text was
+  only darkened to 3:1 (the bar for icons and edges), so "Start" could be hard to read on a light
+  workspace colour. The fill now aims at 4.5:1 for text (`WorkspaceFill` on Android,
+  `getWorkspaceSolidFillColor` on Windows, same maths, both tested). The default green is darker
+  (Android `#188038`; Windows `emerald-700`), and on Windows hover and press darken instead of
+  lighten, so the label never drops under 4.5:1 while the pointer is on it.
 - **Kept:** Windows buttons keep the arrow cursor, as native Windows (Fluent) buttons do.
 
 ## 2026-11-01: Claude Code sessions don't build the APK before pushing

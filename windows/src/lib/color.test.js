@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { getWorkspaceColorVariants, contrastRatio } from './color.js';
+import { getWorkspaceColorVariants, getWorkspaceSolidFillColor, contrastRatio } from './color.js';
 
 test('light variant contrasts >=3:1 against white for bright colors', () => {
   const { light } = getWorkspaceColorVariants('#eab308'); // bright yellow
@@ -34,4 +34,12 @@ test('bright yellow stays recognizably yellow, not brown', () => {
   const { light } = getWorkspaceColorVariants('#eab308');
   // Should move noticeably less than the old 4.5:1 threshold did (#957205).
   assert.ok(contrastRatio(light, '#957205') > 1.15);
+});
+
+test('the solid fill keeps white text at 4.5:1 or more', () => {
+  for (const hex of ['#ffeb3b', '#00bcd4', '#4caf50', '#ff9800', '#0078d4', '#e91e63', '#ffffff', '#9e9e9e']) {
+    const fill = getWorkspaceSolidFillColor(hex);
+    assert.ok(contrastRatio('#ffffff', fill) >= 4.5, `${hex} -> ${fill}`);
+  }
+  assert.equal(getWorkspaceSolidFillColor('#188038'), '#188038');
 });

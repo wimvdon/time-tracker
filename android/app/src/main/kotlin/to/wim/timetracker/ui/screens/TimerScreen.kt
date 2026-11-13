@@ -1383,7 +1383,7 @@ private val TimerActionButtonHeight: Dp = 56.dp
  * white labels (a workspace colour, when set, replaces the green).
  */
 private object TimerColors {
-    val Start = Color(0xFF1E8E3E)
+    val Start = Color(0xFF188038) // white text 5.0:1 (#1E8E3E was 4.2:1)
     val Stop = Color(0xFFD93025)
     val OnAction = Color.White
 }
