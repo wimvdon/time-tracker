@@ -54,8 +54,8 @@ private fun solveLightness(h: Float, s: Float, targetLuminance: Double, darken: 
 /**
  * Given a user-chosen color, returns (light, dark) variants that keep the
  * same hue/saturation but guarantee ~3:1 contrast against the app's
- * light-theme and dark-theme backgrounds. Also safe to use as a solid fill
- * behind white text/icons.
+ * light-theme and dark-theme backgrounds. Not for a fill behind white text: that needs 4.5:1,
+ * see [workspaceSolidFillColor].
  */
 fun workspaceColorVariants(color: Color): Pair<Color, Color> {
     val argb = color.toArgb()
@@ -87,9 +87,8 @@ fun workspaceAccentColor(hex: String?): Color? {
     return if (isDarkColorScheme()) dark else light
 }
 
-/** The variant guaranteed dark/saturated enough to sit behind white
- *  text/icons (e.g. the Start button), independent of the app's theme. */
+/** The workspace colour as a fill behind white text (the Start button): 4.5:1 or more ([WorkspaceFill]). */
 fun workspaceSolidFillColor(hex: String?): Color? {
     val color = parseWorkspaceColorOrNull(hex) ?: return null
-    return workspaceColorVariants(color).first
+    return Color(0xFF000000.toInt() or WorkspaceFill.forWhiteText(color.toArgb()))
 }

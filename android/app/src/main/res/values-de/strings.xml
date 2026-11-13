@@ -63,7 +63,7 @@
     <string name="title_remove_extra_field">Feld entfernen</string>
     <string name="placeholder_select_field">Feld auswählen…</string>
     <string name="label_required_field">Erforderlich</string>
-    <string name="toast_required_fields_missing">Fülle bitte alle erforderlichen Felder aus, bevor du startest.</string>
+    <string name="toast_required_fields_missing">Fülle alle erforderlichen Felder aus, bevor du startest.</string>
     <string name="toast_required_before_stopping">Erforderliche Felder ausfüllen, bevor du stoppst.</string>
     <string name="label_description_required">Beschreibung erforderlich</string>
     <string name="hint_description_required">Ein Timer in diesem Arbeitsbereich kann ohne Beschreibung nicht gestoppt werden.</string>
@@ -100,6 +100,7 @@
 
     <!-- Recent entries -->
     <string name="recent_entries_heading">Letzte Zeiteinträge</string>
+    <string name="recent_entries_failed">Letzte Zeiteinträge konnten nicht geladen werden.</string>
     <string name="title_delete_entry">Löschen</string>
     <string name="title_open_in_notion">In Notion öffnen</string>
     <string name="title_start_from_entry">Neuen Timer mit diesen Angaben starten</string>

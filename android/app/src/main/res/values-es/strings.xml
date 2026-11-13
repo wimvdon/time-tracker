@@ -100,6 +100,7 @@
 
     <!-- Recent entries -->
     <string name="recent_entries_heading">Entradas de tiempo recientes</string>
+    <string name="recent_entries_failed">No se pudieron cargar las entradas de tiempo recientes.</string>
     <string name="title_delete_entry">Eliminar</string>
     <string name="title_open_in_notion">Abrir en Notion</string>
     <string name="title_start_from_entry">Iniciar un nuevo temporizador con estos datos</string>

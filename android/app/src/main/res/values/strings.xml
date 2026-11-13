@@ -63,7 +63,7 @@
     <string name="title_remove_extra_field">Remove field</string>
     <string name="placeholder_select_field">Select field…</string>
     <string name="label_required_field">Required</string>
-    <string name="toast_required_fields_missing">Please fill in all required fields before starting.</string>
+    <string name="toast_required_fields_missing">Fill in all required fields before starting.</string>
     <string name="toast_required_before_stopping">Fill in required fields before stopping.</string>
     <string name="label_description_required">Description required</string>
     <string name="hint_description_required">A timer in this workspace cannot be stopped without a description.</string>
@@ -100,6 +100,7 @@
 
     <!-- Recent entries -->
     <string name="recent_entries_heading">Recent time entries</string>
+    <string name="recent_entries_failed">Couldn\'t load recent time entries.</string>
     <string name="title_delete_entry">Delete</string>
     <string name="title_open_in_notion">Open in Notion</string>
     <string name="title_start_from_entry">Start a new timer with these details</string>

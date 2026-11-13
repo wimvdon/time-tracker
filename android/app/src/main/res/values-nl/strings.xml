@@ -100,6 +100,7 @@
 
     <!-- Recent entries -->
     <string name="recent_entries_heading">Recente tijdsregistraties</string>
+    <string name="recent_entries_failed">Recente tijdsregistraties konden niet worden geladen.</string>
     <string name="title_delete_entry">Verwijderen</string>
     <string name="title_open_in_notion">Openen in Notion</string>
     <string name="title_start_from_entry">Nieuwe timer starten met deze gegevens</string>

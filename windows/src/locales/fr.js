@@ -84,7 +84,7 @@ export default {
   titleRemoveExtraField: 'Supprimer le champ',
   placeholderSelectField: 'Sélectionner le champ…',
   labelRequiredField: 'Requis',
-  toastRequiredFieldsMissing: 'Veuillez remplir tous les champs obligatoires avant de démarrer.',
+  toastRequiredFieldsMissing: 'Remplissez tous les champs obligatoires avant de démarrer.',
   toastRequiredBeforeStopping: 'Remplissez les champs requis (en rouge) avant d\'arrêter.',
   labelDescriptionRequired: 'Description obligatoire',
   hintDescriptionRequired: 'Un minuteur de cet espace ne peut pas être arrêté sans description.',
@@ -129,6 +129,7 @@ export default {
   titleSettings: 'Paramètres',
 
   recentEntriesHeading: 'Saisies de temps récentes',
+  recentEntriesFailed: 'Impossible de charger les saisies de temps récentes.',
   titleDeleteEntry: 'Supprimer',
   titleOpenInNotion: 'Ouvrir dans Notion',
   titleStartFromEntry: 'Démarrer un nouveau chronomètre avec ces informations',

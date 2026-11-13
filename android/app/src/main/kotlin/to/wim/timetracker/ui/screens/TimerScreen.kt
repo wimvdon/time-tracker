@@ -497,6 +497,8 @@ private fun IdleView(
             RecentEntriesSection(
                 entries = uiState.recentEntries,
                 loading = uiState.recentEntriesLoading,
+                failed = uiState.recentEntriesFailed,
+                onRetry = onRefreshAll,
                 workspaces = uiState.workspaces,
                 onDelete = { re -> onConfirmDelete(re.pageId, re.title, false) },
                 onOpenUrl = onOpenUrl,
@@ -854,6 +856,8 @@ private fun RunningView(
                 RecentEntriesSection(
                     entries = uiState.recentEntries,
                     loading = uiState.recentEntriesLoading,
+                    failed = uiState.recentEntriesFailed,
+                    onRetry = onRefreshAll,
                     workspaces = uiState.workspaces,
                     onDelete = { re -> onConfirmDelete(re.pageId, re.title, false) },
                     onOpenUrl = onOpenUrl,
@@ -1149,6 +1153,8 @@ private fun OtherRunningTimers(
 private fun RecentEntriesSection(
     entries: List<RecentEntryInfo>,
     loading: Boolean,
+    failed: Boolean = false,
+    onRetry: () -> Unit = {},
     workspaces: List<to.wim.timetracker.data.models.Workspace> = emptyList(),
     onDelete: (RecentEntryInfo) -> Unit,
     onOpenUrl: (String) -> Unit,
@@ -1160,6 +1166,23 @@ private fun RecentEntriesSection(
 ) {
     // The first load shows placeholder cards; a refresh keeps the list and shows the spinner.
     val firstLoad = entries.isEmpty() && loading
+    if (entries.isEmpty() && failed && !loading) {
+        SectionHeader(stringResource(R.string.recent_entries_heading), loading = false)
+        Row(
+            modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                stringResource(R.string.recent_entries_failed),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.weight(1f)
+            )
+            TextButton(onClick = onRetry) { Text(stringResource(R.string.btn_retry)) }
+        }
+        return
+    }
     if (entries.isEmpty() && !firstLoad) return
 
     SectionHeader(stringResource(R.string.recent_entries_heading), loading = loading && !firstLoad)
@@ -1360,7 +1383,7 @@ private val TimerActionButtonHeight: Dp = 56.dp
  * white labels (a workspace colour, when set, replaces the green).
  */
 private object TimerColors {
-    val Start = Color(0xFF1E8E3E)
+    val Start = Color(0xFF188038) // white text 5.0:1 (#1E8E3E was 4.2:1)
     val Stop = Color(0xFFD93025)
     val OnAction = Color.White
 }

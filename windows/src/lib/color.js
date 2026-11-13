@@ -108,8 +108,8 @@ function solveLightness(h, s, targetLuminance, direction) {
 /**
  * Given a user-chosen hex color, returns { light, dark } variants that keep
  * the same hue/saturation but guarantee ~3:1 contrast against the app's
- * light-theme (near-white) and dark-theme (near-black) backgrounds. Also
- * safe to use as a solid fill behind white text/icons.
+ * light-theme (near-white) and dark-theme (near-black) backgrounds. For a
+ * fill behind white text use getWorkspaceSolidFillColor (4.5:1).
  */
 export function getWorkspaceColorVariants(hex) {
   const rgb = hexToRgb(hex);
@@ -139,11 +139,21 @@ export function getWorkspaceAccentColor(hex, isDarkTheme) {
   return isDarkTheme ? variants.dark : variants.light;
 }
 
+// White text needs 4.5:1 (WCAG AA), not the 3:1 the theme variants aim for.
+const TEXT_CONTRAST = 4.5;
+// Aims at 4.6 so rounding to whole RGB values never lands just under 4.5.
+const SOLID_FILL_TARGET_LUMINANCE = (1 + 0.05) / (TEXT_CONTRAST + 0.1) - 0.05;
+
 /**
- * The variant guaranteed dark/saturated enough to sit behind white text or
- * icons (e.g. the Start button, tray icon), independent of the app's theme.
+ * The workspace colour as a fill behind white text or icons (the Start button, tray icon):
+ * darkened, hue and saturation kept, until white on it is 4.5:1. Same as WorkspaceFill on Android.
  */
 export function getWorkspaceSolidFillColor(hex) {
   if (!hex) return null;
-  return getWorkspaceColorVariants(hex).light;
+  const rgb = hexToRgb(hex);
+  if (relativeLuminance(rgb) <= SOLID_FILL_TARGET_LUMINANCE) return rgbToHex(rgb.r, rgb.g, rgb.b);
+  const { h, s } = rgbToHsl(rgb.r, rgb.g, rgb.b);
+  const l = solveLightness(h, s, SOLID_FILL_TARGET_LUMINANCE, 'darken');
+  const out = hslToRgb(h, s, l);
+  return rgbToHex(out.r, out.g, out.b);
 }

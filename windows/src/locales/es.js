@@ -84,7 +84,7 @@ export default {
   titleRemoveExtraField: 'Eliminar campo',
   placeholderSelectField: 'Seleccionar campo…',
   labelRequiredField: 'Requerido',
-  toastRequiredFieldsMissing: 'Por favor, rellene todos los campos requeridos antes de comenzar.',
+  toastRequiredFieldsMissing: 'Rellene todos los campos requeridos antes de comenzar.',
   toastRequiredBeforeStopping: 'Rellene los campos requeridos (marcados en rojo) antes de detener.',
   labelDescriptionRequired: 'Descripción obligatoria',
   hintDescriptionRequired: 'Un temporizador de este espacio no se puede detener sin descripción.',
@@ -129,6 +129,7 @@ export default {
   titleSettings: 'Ajustes',
 
   recentEntriesHeading: 'Entradas de tiempo recientes',
+  recentEntriesFailed: 'No se pudieron cargar las entradas de tiempo recientes.',
   titleDeleteEntry: 'Eliminar',
   titleOpenInNotion: 'Abrir en Notion',
   titleStartFromEntry: 'Iniciar un nuevo temporizador con estos datos',

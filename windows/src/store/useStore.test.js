@@ -135,3 +135,33 @@ test('savePreset adds a new preset at the end and edits one in place', async () 
   await useStore.getState().savePreset({ workspaceId: 'ws1', name: '  ' });
   assert.equal(useStore.getState().workspaces[0].presets.length, 3);
 });
+
+test('recent entries say they could not load only when a query failed and nothing is left', async () => {
+  const { useStore } = await import('./useStore.js');
+  const api = globalThis.window.notionAPI;
+  const ws = (id) => ({
+    id,
+    name: id,
+    timeEntriesDbId: 'db-' + id,
+    propertyMap: { timeEntryStatusProp: 'Status', timeEntryStatusDone: 'Done', timeEntryDateProp: 'Date' },
+  });
+  const entry = { pageId: 'e1', title: 'Entry', startISO: '2026-11-13T09:00:00Z', endISO: '2026-11-13T10:00:00Z' };
+
+  api.fetchRecentEntries = async () => { throw new Error('Network error reaching Notion'); };
+  useStore.setState({ notionAccount: { workspaceName: 'Team' }, workspaces: [ws('a')], recentEntries: [], recentEntriesLoading: false });
+  await useStore.getState().loadRecentEntries();
+  assert.equal(useStore.getState().recentEntriesFailed, true);
+
+  // One workspace failing while another loads shows the entries, not the error.
+  api.fetchRecentEntries = async (dbId) => { if (dbId === 'db-a') throw new Error('down'); return [entry]; };
+  useStore.setState({ workspaces: [ws('a'), ws('b')], recentEntries: [] });
+  await useStore.getState().loadRecentEntries();
+  assert.equal(useStore.getState().recentEntriesFailed, false);
+  assert.equal(useStore.getState().recentEntries.length, 1);
+
+  // An empty list that loaded fine is not an error.
+  api.fetchRecentEntries = async () => [];
+  useStore.setState({ workspaces: [ws('a')], recentEntries: [] });
+  await useStore.getState().loadRecentEntries();
+  assert.equal(useStore.getState().recentEntriesFailed, false);
+});

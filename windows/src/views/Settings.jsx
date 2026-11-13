@@ -61,10 +61,11 @@ export default function Settings() {
       <div className="flex items-center gap-2">
         <button
           onClick={() => setView('timer')}
-          className="text-fg2 hover:text-fg1 text-lg"
+          className="text-fg2 hover:text-fg1 hover:bg-subtle-hover text-lg rounded-md px-1.5 -ml-1.5 min-w-7 min-h-7"
           title={t('titleBack')}
+          aria-label={t('titleBack')}
         >
-          {t('btnBack')}
+          <span aria-hidden="true">{t('btnBack')}</span>
         </button>
         <h1 className="text-base font-semibold">{t('settingsTitle')}</h1>
       </div>
