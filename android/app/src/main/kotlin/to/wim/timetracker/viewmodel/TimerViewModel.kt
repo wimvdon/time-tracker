@@ -36,8 +36,8 @@ private const val RECENTLY_STOPPED_TTL_MS = 60_000L
 
 /**
  * Keys for the messages the timer screen can show. The view model cannot
- * translate them itself — its Application context follows the *system*
- * language, not the one chosen in Settings — so it emits a key and the
+ * translate them itself: its Application context follows the *system*
+ * language, not the one chosen in Settings, so it emits a key and the
  * composables resolve it against their (locale-wrapped) resources. A key may
  * carry Notion's own message after a `|`, which is appended as detail.
  */
@@ -303,7 +303,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
                 previousWorkspace.timeEntriesDbId != currentWorkspace.timeEntriesDbId
             ) {
                 // The extra-field configuration changed (edited here or pulled in from
-                // another device by the sync) — the form on screen is describing the
+                // another device by the sync); the form on screen is describing the
                 // old configuration, so rebuild it.
                 extrasJob?.cancel()
                 extrasJob = viewModelScope.launch { loadExtraFieldDefs(currentWorkspace) }
@@ -346,7 +346,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
 
     /** Loads [workspace]'s extra fields as the current extras load (superseding any
      *  in flight) and waits for it, so callers that need the definitions before they
-     *  can act — presets, shortcuts, "play" on a recent entry — get them. */
+     *  can act (presets, shortcuts, "play" on a recent entry) get them. */
     private suspend fun loadExtraFieldDefsAndWait(workspace: Workspace) {
         extrasJob?.cancel()
         val job = viewModelScope.launch { loadExtraFieldDefs(workspace) }
@@ -410,7 +410,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
 
             val options: List<NamedOption> = when (type) {
                 // getDatabaseSchema() only populates selectOptions for select/multi_select
-                // (statusOptions is status-only) — reading statusOptions here left every
+                // (statusOptions is status-only); reading statusOptions here left every
                 // select/multi_select field with no options at all, so nothing (default,
                 // preset, or synced) could ever show as selected.
                 "select", "multi_select" -> schemaProp.selectOptions.map { NamedOption(it.name, it.name) }
@@ -441,7 +441,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
 
         // A configured property that isn't in the schema (renamed or deleted in
         // Notion, or a relation to a database not shared with the app, which Notion
-        // leaves out) is dropped from the form — say so instead of just showing
+        // leaves out) is dropped from the form; say so instead of just showing
         // fewer fields than the workspace is configured with. Same rule as Windows
         // (src/lib/schema.js, countMissingExtraProps).
         val missing = workspace.extraProps.count { prop ->
@@ -584,7 +584,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
             val projectName = state.projects.firstOrNull { it.id == projectId }?.name ?: ""
             // The description may be cleared; the page itself never gets an empty
             // title (that reads as "Untitled" in Notion), so it falls back to the
-            // entry's start date — same as when it was started without one.
+            // entry's start date, same as when it was started without one.
             val newDescription = description.trim()
             val startMs = runCatching { parseIso(timer.rawStart) }.getOrDefault(System.currentTimeMillis())
             val newTitle = newDescription.ifBlank { fallbackDescription(startMs, state.dateFormat) }
@@ -594,7 +594,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
             // The relation the workspace uses as its "project" link. It is only
             // written when there is an id to write: the timer screen has no project
             // picker, so a null id means "this device does not know the value", not
-            // "the user cleared it" — writing an empty relation there wiped the link
+            // "the user cleared it"; writing an empty relation there wiped the link
             // on the Notion page on every description/extra-field save. When the same
             // property is also configured as an extra field, that field is the single
             // source of truth and this must not write it at all.
@@ -651,7 +651,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             // The field definitions decide which extra properties get written, so a
             // start fired while they are still loading (preset, launcher shortcut, or
-            // a fast tap right after switching workspace) waits for them first —
+            // a fast tap right after switching workspace) waits for them first,
             // otherwise every extra value, required ones included, is silently
             // dropped from the new entry.
             extrasJob?.join()
@@ -724,7 +724,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
     /**
      * Stops the currently active timer's Notion page and clears the local
      * "active" slot (tickJob cancelled, uiState reset to not-running). Does
-     * not touch `runningTimers` or the foreground service — callers decide
+     * not touch `runningTimers` or the foreground service; callers decide
      * what happens next (promote another running timer, leave idle, or
      * immediately start a new one).
      */
@@ -776,7 +776,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
      * even refused while the text was sitting there on screen.
      *
      * Returns false when the write failed. The draft is then kept on screen but
-     * not recorded as saved — recording it anyway made a retried Stop skip the
+     * not recorded as saved; recording it anyway made a retried Stop skip the
      * write and close the entry with its old title.
      */
     private suspend fun commitDescription(timer: ActiveTimer, description: String): Boolean {
@@ -929,7 +929,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
      * Catches up with a Stop tapped on the notification while the app was in
      * the background. The service reports that with a broadcast only the
      * visible activity receives, so the screen kept showing the timer as
-     * running — and stopping it again from there overwrote the end time the
+     * running, and stopping it again from there overwrote the end time the
      * notification had already written. The service clears the stored active
      * timer once Notion has the stop, so a running timer with nothing stored
      * behind it was stopped elsewhere.
@@ -1030,7 +1030,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
         _uiState.update { it.copy(runningTimersLoading = true) }
 
         // The flag is cleared in a finally: left set by an unexpected failure it
-        // would turn every later refresh — manual and periodic alike — into an
+        // would turn every later refresh (manual and periodic alike) into an
         // immediate no-op, with nothing on screen to say why.
         try {
             val allRunning = mutableListOf<RunningTimerInfo>()
@@ -1253,7 +1253,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
      * Retries a Notion call up to [attempts] times with a short delay between tries.
      * Adopting a timer fires several Notion calls at once (running timers, recent
      * entries, this device's own workspace schema fetch, and this call's page
-     * properties + schema fetch) — a single transient failure or momentary rate
+     * properties + schema fetch), a single transient failure or momentary rate
      * limit among them shouldn't leave extra field values blank until the next
      * scheduled sync. Returns null once every attempt has failed.
      */
@@ -1291,12 +1291,12 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
         } else ""
 
         // workspace.extraProps[].type is not a reliable source of the real Notion
-        // property type (it's never populated on save) — fetch the live schema,
+        // property type (it's never populated on save); fetch the live schema,
         // same as loadExtraFieldDefs does, to know how to parse each value. If the
         // schema still can't be fetched after retrying, bail out entirely instead
         // of falling back to an empty schema: every extra value would then parse
         // as blank (prop.type is never populated either) and overwrite whatever
-        // correct values were already showing — a stale-but-right value beats a
+        // correct values were already showing; a stale-but-right value beats a
         // freshly-wrong one.
         val extraValues = if (workspace.extraProps.isEmpty() || workspace.timeEntriesDbId.isBlank()) {
             emptyMap()
@@ -1398,7 +1398,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
                     settingsRepo.saveLastWorkspaceId(workspaceId)
                 }
                 // startTimer() only writes a property if it has a loaded def for it, so
-                // this must be awaited before merging the preset's values in — otherwise,
+                // this must be awaited before merging the preset's values in; otherwise,
                 // if defs for this workspace are still loading (e.g. a shortcut/preset
                 // fired right after launch, before the workspace's own selectWorkspace()
                 // load finished), the preset's defaults would silently be dropped.
@@ -1445,7 +1445,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
     /**
      * "Play" on a recent entry: starts a new timer in the same workspace, with
      * the same description, connected project and extra field values as that
-     * entry — but starting now, with no end. Mirrors applyPreset's flow, except
+     * entry, but starting now, with no end. Mirrors applyPreset's flow, except
      * the project/extra values are read from the source Notion page (its own
      * schema-backed source of truth) rather than from a saved preset.
      */
@@ -1539,7 +1539,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
      *
      * On create, an empty field is left out so Notion applies whatever default
      * the database has. On update it has to be written as an explicit empty
-     * value instead ([clearEmpty]) — skipping it there meant a value could be
+     * value instead ([clearEmpty]); skipping it there meant a value could be
      * set but never cleared again, since the page kept the old one.
      */
     private fun buildExtraNotionValues(
@@ -1611,7 +1611,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
     /**
      * The page title written to Notion when the description is left empty: the
      * entry's own start date, in the format chosen in Settings. The description
-     * input itself is never pre-filled with it — the fallback only ever exists
+     * input itself is never pre-filled with it; the fallback only ever exists
      * on the Notion page.
      */
     private fun fallbackDescription(startMs: Long, dateFormat: String): String =
@@ -1751,7 +1751,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
      * Applies a preset edit made from the timer screen. The change is shown at
      * once, then applied to the *stored* workspaces rather than to this
      * screen's copy: writing the copy back undid anything a sync had pulled in
-     * since it was loaded — and, with the timestamp bumped, pushed that older
+     * since it was loaded, and, with the timestamp bumped, pushed that older
      * list over the newer one on every other device. Bumping the settings
      * timestamp is what tells the next sync this device has edits to push.
      * (Same as SettingsViewModel.saveWorkspaces.)

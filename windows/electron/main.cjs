@@ -97,7 +97,7 @@ function makeColoredTrayIcon(hexColor) {
 }
 
 // encryptionKey obfuscates the config file at rest (it is not a hard security
-// boundary — anyone with access to this source can derive it). The Notion sign-in itself is
+// boundary: anyone with access to this source can derive it). The Notion sign-in itself is
 // additionally encrypted with Windows' DPAPI, see notionTokens.cjs.
 const store = new Store({
   encryptionKey: 'notion-timer-local-config-v1',
@@ -310,7 +310,7 @@ function rebuildTrayMenu() {
       },
     });
   }
-  // Preset quick-start items — always available, even while a timer is
+  // Preset quick-start items, always available, even while a timer is
   // running. If one is, the renderer shows the "stop & start new" dialog
   // instead of silently starting a second timer.
   const presetItems = [];
@@ -380,7 +380,7 @@ handle('store:set', (_event, data) => {
       // Only notionTokens may write the sign-in.
       continue;
     } else if (value === undefined) {
-      // undefined means "remove this key" — used by schema migrations
+      // undefined means "remove this key", used by schema migrations
       store.delete(key);
     } else {
       store.set(key, value);
@@ -453,7 +453,7 @@ handle('sync:put', (_event, payload) => {
 });
 handle('sync:delete', () => settingsSync.remove());
 
-// Only web links (Notion page URLs) — never file:// or other protocol handlers.
+// Only web links (Notion page URLs), never file:// or other protocol handlers.
 handle('shell:openExternal', (_event, url) => {
   if (typeof url !== 'string' || !/^https?:\/\//i.test(url)) return;
   return shell.openExternal(url);

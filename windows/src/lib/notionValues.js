@@ -35,9 +35,9 @@ export function emptyValueFor(type) {
 
 /**
  * Brings a stored value into the input shape this app uses for `type`.
- * Presets synced from the Android app store every value as a string —
+ * Presets synced from the Android app store every value as a string,
  * multi-select and people as comma-separated names/ids, checkboxes as
- * "true"/"false" — which this app's inputs don't read: a multi-select was
+ * "true"/"false", which this app's inputs don't read: a multi-select was
  * silently dropped and "false" ticked the checkbox.
  */
 export function coerceInputValue(type, value) {
@@ -61,7 +61,7 @@ export function coerceInputValue(type, value) {
 
 /**
  * Converts a raw input value into a Notion API property value.
- * Returns null when the value is empty — empty fields are omitted from the
+ * Returns null when the value is empty; empty fields are omitted from the
  * create payload so Notion keeps its own defaults.
  *
  * @param {string} type   Notion property type (one of WRITABLE_EXTRA_TYPES)

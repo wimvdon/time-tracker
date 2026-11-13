@@ -16,8 +16,8 @@ const locales = {
 
 /**
  * Maps any locale tag to one of the bundled locales by its language subtag.
- * Both apps write their own tags into the shared sync page — this app stores
- * `en-GB`/`nl-BE`, the Android app stores `en`/`nl` — so a tag pulled from the
+ * Both apps write their own tags into the shared sync page: this app stores
+ * `en-GB`/`nl-BE`, the Android app stores `en`/`nl`, so a tag pulled from the
  * other device has to resolve by language, not by exact match, or the language
  * silently falls back to English on every sync.
  */

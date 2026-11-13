@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Time Tracker</string>
 
-    <!-- Timer — idle -->
+    <!-- Timer: idle -->
     <string name="label_workspace">Werkruimte</string>
     <string name="label_description">Bezig met…</string>
     <string name="placeholder_description">Omschrijving</string>
@@ -200,7 +200,7 @@
     <string name="title_select_end_time">Eindtijd kiezen</string>
     <string name="title_info">Informatie</string>
     <string name="error_not_signed_in">Niet aangemeld bij Notion. Meld je aan in Instellingen.</string>
-    <string name="error_stop_from_notification_failed">Stoppen mislukt — open de app om het opnieuw te proberen</string>
+    <string name="error_stop_from_notification_failed">Stoppen mislukt. Open de app om het opnieuw te proberen</string>
     <string name="section_expanded">Uitgevouwen</string>
     <string name="section_collapsed">Ingevouwen</string>
     <string name="label_theme_mode">Thema</string>

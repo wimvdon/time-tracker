@@ -220,7 +220,7 @@ private fun AppNavigation(
 
         composable("settings") {
             // Reload workspaces/settings into the timer screen whenever Settings is left,
-            // regardless of how (back arrow, system back or gesture) — no app restart needed.
+            // regardless of how (back arrow, system back or gesture), no app restart needed.
             DisposableEffect(Unit) {
                 onDispose { timerViewModel.refreshSettings() }
             }

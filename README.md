@@ -1,15 +1,15 @@
 # Time Tracker for Notion
 
-## 📚 Documentation
+## Documentation
 | | |
 |---|---|
-| [⚙️ Architecture](docs/architecture.md) | System design, components and flow |
-| [📁 Structure](docs/structure.md) | Project organization and responsibilities |
-| [🚀 Installation](docs/installation.md) | Requirements and steps to run the project |
-| [🧠 Technical decisions](docs/decisions.md) | Trade-offs and design justifications |
-| [📖 Usage guide](docs/usage.md) | Notion setup, tracking time, presets, sync |
-| [🔌 API](docs/api.md) | Notion API calls, synced settings format, IPC bridge, launch arguments, sign-in and sync server |
-| [🧪 Testing](docs/testing.md) | How to run tests and what they cover |
+| [Architecture](docs/architecture.md) | System design, components and flow |
+| [Structure](docs/structure.md) | Project organization and responsibilities |
+| [Installation](docs/installation.md) | Requirements and steps to run the project |
+| [Technical decisions](docs/decisions.md) | Trade-offs and design justifications |
+| [Usage guide](docs/usage.md) | Notion setup, tracking time, presets, sync |
+| [API](docs/api.md) | Notion API calls, synced settings format, IPC bridge, launch arguments, sign-in and sync server |
+| [Testing](docs/testing.md) | How to run tests and what they cover |
 
 ---
 

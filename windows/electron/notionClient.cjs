@@ -1,4 +1,4 @@
-// All Notion REST API calls. Runs in the main process only — the renderer
+// All Notion REST API calls. Runs in the main process only; the renderer
 // never sees a Notion token.
 //
 // Every call takes `auth`: { token(), refresh(failedToken) } from notionAuth.cjs (a plain token
@@ -14,7 +14,7 @@ const NOTION_VERSION = '2022-06-28';
  * 429 once that is exceeded. Loading a workspace's fields fires several calls
  * at once (schema, related-database pages, users) on top of the running-timer
  * and recent-entry queries for every workspace, so a burst can easily hit that
- * ceiling. Retrying here — honouring Retry-After — keeps a throttled call from
+ * ceiling. Retrying here (honouring Retry-After) keeps a throttled call from
  * surfacing as an empty schema or an empty option list further up.
  */
 const MAX_ATTEMPTS = 4;
@@ -183,7 +183,7 @@ async function createTimeEntry(auth, { dbId, title, startISO, projectId, props, 
 
 /**
  * Completes a time entry (STOP). startISO must be the exact value used at
- * creation — it is not re-rounded.
+ * creation; it is not re-rounded.
  * @param {object} params { pageId, startISO, endISO, props }
  */
 async function stopTimeEntry(auth, { pageId, startISO, endISO, props }) {

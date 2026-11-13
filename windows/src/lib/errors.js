@@ -7,7 +7,7 @@ const SIGN_IN_CANCELLED = 'SIGN_IN_CANCELLED';
 /**
  * Returns a clean, user-displayable message from an error. Errors crossing
  * the IPC bridge arrive wrapped as "Error invoking remote method 'x': Error:
- * actual message" — strip that noise so toasts show only the actual message.
+ * actual message"; strip that noise so toasts show only the actual message.
  */
 export function errorMessage(err) {
   const message = String(err?.message || err).replace(

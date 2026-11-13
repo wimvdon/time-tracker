@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Time Tracker</string>
 
-    <!-- Timer — idle -->
+    <!-- Timer: idle -->
     <string name="label_workspace">Espace de travail</string>
     <string name="label_description">Travaille sur…</string>
     <string name="placeholder_description">Description</string>
@@ -200,7 +200,7 @@
     <string name="title_select_end_time">Choisir l\'heure de fin</string>
     <string name="title_info">Informations</string>
     <string name="error_not_signed_in">Non connecté à Notion. Connectez-vous dans les Paramètres.</string>
-    <string name="error_stop_from_notification_failed">Échec de l\'arrêt — ouvrez l\'application pour réessayer</string>
+    <string name="error_stop_from_notification_failed">Échec de l\'arrêt. Ouvrez l\'application pour réessayer</string>
     <string name="section_expanded">Développé</string>
     <string name="section_collapsed">Réduit</string>
     <string name="label_theme_mode">Thème</string>

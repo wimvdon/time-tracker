@@ -396,7 +396,7 @@ private fun IdleView(
 
             TimerDetailsCard(containerColor = MaterialTheme.colorScheme.surfaceContainerLow) {
                 // Like required extra fields, a required description is enforced when
-                // the timer is stopped — starting stays a single tap.
+                // the timer is stopped; starting stays a single tap.
                 val descriptionRequired = selectedWorkspace?.descriptionRequired == true
                 OutlinedTextField(
                     value = uiState.description,
@@ -755,7 +755,7 @@ private fun RunningView(
                 LaunchedEffect(uiState.extraFieldDefs, uiState.selectedProjectId, uiState.extraValues, timer.notionPageId) {
                     // A refresh from Notion must not overwrite an edit that has not been
                     // saved yet (the save is debounced by 600 ms, the auto-refresh runs
-                    // every 60 s — without this the value snapped back while typing).
+                    // every 60 s; without this the value snapped back while typing).
                     if (pendingSave) return@LaunchedEffect
                     localProjectId = uiState.selectedProjectId
                     localExtras = uiState.extraValues
@@ -970,7 +970,7 @@ private val HeroSize: Dp = 272.dp
 
 /**
  * Every field of the timer in one card: a Group-shaped surface sets the form apart from the
- * timer above and the lists below. Not collapsible — all fields are always in reach.
+ * timer above and the lists below. Not collapsible: all fields are always in reach.
  */
 @Composable
 private fun TimerDetailsCard(containerColor: Color, content: @Composable ColumnScope.() -> Unit) {
@@ -1062,7 +1062,7 @@ private fun OtherRunningTimers(
     if (timers.isEmpty() && error == null) return
 
     // Drives the per-second elapsed counters below. It has to be *read* while
-    // composing them — a state that is only written recomposes nothing, which
+    // composing them: a state that is only written recomposes nothing, which
     // left every timer in this list frozen at the value it had when the list
     // was first drawn.
     var nowMs by remember { mutableStateOf(System.currentTimeMillis()) }
@@ -1302,7 +1302,7 @@ private fun PresetChips(
                 SuggestionChip(
                     onClick = { onApplyPreset(ws.id, preset) },
                     // One line, ellipsized only when the chip would be wider than
-                    // the row — same as the Windows chips.
+                    // the row, same as the Windows chips.
                     label = {
                         Text(
                             chipLabel,

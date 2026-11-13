@@ -1,5 +1,5 @@
 export default {
-  // Timer view — idle
+  // Timer view, idle
   labelWorkspace: 'Spazio di lavoro',
   labelProject: 'Progetto',
   labelDescription: 'Descrizione',

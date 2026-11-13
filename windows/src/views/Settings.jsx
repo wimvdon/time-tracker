@@ -411,7 +411,7 @@ function WorkspaceModal({ workspace, onClose }) {
   const [color, setColor] = useState(workspace?.color || '');
   const [descriptionRequired, setDescriptionRequired] = useState(!!workspace?.descriptionRequired);
 
-  // Database list — fetched once per modal lifetime (Retry/Refresh re-fetches)
+  // Database list, fetched once per modal lifetime (Retry/Refresh re-fetches)
   const [dbs, setDbs] = useState({ loading: true, error: null, items: [] });
   // Schema of the selected Time Entries database
   const [teSchema, setTeSchema] = useState({ loading: false, error: null, schema: null });
@@ -523,7 +523,7 @@ function WorkspaceModal({ workspace, onClose }) {
         timeEntryStatusDone: sel.timeEntryStatusDone,
         timeEntryRelationProp: relPropName,
       },
-      // Keeps each row's other fields — notably the default value set in the
+      // Keeps each row's other fields, notably the default value set in the
       // Android app, which this form has no input for. A row whose property
       // was changed here starts fresh (see the field picker below), so a
       // default never carries over to a different property.
@@ -559,7 +559,7 @@ function WorkspaceModal({ workspace, onClose }) {
           {workspace ? t('modalTitleEditWorkspace') : t('modalTitleAddWorkspace')}
         </h2>
 
-        {/* Section A — Name */}
+        {/* Name */}
         <Field label={t('labelWorkspaceName')}>
           <input
             type="text"
@@ -569,7 +569,7 @@ function WorkspaceModal({ workspace, onClose }) {
           />
         </Field>
 
-        {/* Section B — Time Entries database */}
+        {/* Time Entries database */}
         {dbs.error && (
           <div className="text-xs bg-danger-bg border border-danger-stroke text-fg1 rounded-md p-2 flex items-start gap-2">
             <span className="flex-1">{`${t('errorLoadingDatabases')}: ${dbs.error}`}</span>
@@ -607,7 +607,7 @@ function WorkspaceModal({ workspace, onClose }) {
           <p className="text-xs text-fg3 mt-1">{t('hintTimeEntriesDb')}</p>
         </div>
 
-        {/* Section C — Time entry properties */}
+        {/* Time entry properties */}
         {timeEntriesDbId && (
           <div className="flex flex-col gap-3 border-t border-stroke pt-3">
             {teSchema.error && (
@@ -668,7 +668,7 @@ function WorkspaceModal({ workspace, onClose }) {
           </div>
         )}
 
-        {/* Section D — Extra fields (optional, max 5) */}
+        {/* Extra fields (optional, max 5) */}
         {timeEntriesDbId && teSchema.schema && (
           <div className="flex flex-col gap-2 border-t border-stroke pt-3">
             <p className="text-xs font-semibold text-fg2">{t('sectionExtraFields')}</p>
@@ -729,7 +729,7 @@ function WorkspaceModal({ workspace, onClose }) {
 
 
 
-        {/* Section E — Description */}
+        {/* Description */}
         <div className="border-t border-stroke pt-3">
           <label className="flex items-center gap-2 text-xs text-fg2 cursor-pointer">
             <input
@@ -745,7 +745,7 @@ function WorkspaceModal({ workspace, onClose }) {
           </p>
         </div>
 
-        {/* Section F — Rounding */}
+        {/* Rounding */}
         <div className="border-t border-stroke pt-3">
           <label className="block text-xs text-fg2 mb-1">{t('labelWorkspaceRounding')}</label>
           <SearchableSelect
@@ -758,7 +758,7 @@ function WorkspaceModal({ workspace, onClose }) {
           <p className="text-xs text-fg3 mt-1">{t('workspaceRoundingHint')}</p>
         </div>
 
-        {/* Section G — Colour */}
+        {/* Colour */}
         <div className="border-t border-stroke pt-3">
           <label className="block text-xs text-fg2 mb-2">{t('labelWorkspaceColor')}</label>
           <WorkspaceColorPicker value={color} onChange={setColor} />
@@ -766,7 +766,7 @@ function WorkspaceModal({ workspace, onClose }) {
 
 
 
-        {/* Section I — Buttons */}
+        {/* Buttons */}
         {!complete && (
           <p className="text-xs text-fg3">{t('saveIncompleteHint')}</p>
         )}

@@ -2,9 +2,9 @@
 
 The project exposes no HTTP API of its own. These are the interfaces it depends on or offers:
 
-1. [Notion REST API calls](#1-notion-rest-api-calls) — what both apps send to Notion
-2. [Synced settings format](#2-synced-settings-format) — the contract between the Windows and Android apps
-3. [Windows IPC bridge](#3-windows-ipc-bridge-windownotionapi) — renderer ↔ main process
+1. [Notion REST API calls](#1-notion-rest-api-calls): what both apps send to Notion
+2. [Synced settings format](#2-synced-settings-format): the contract between the Windows and Android apps
+3. [Windows IPC bridge](#3-windows-ipc-bridge-windownotionapi): renderer ↔ main process
 4. [Windows command-line arguments](#4-windows-command-line-arguments)
 5. [Android intents](#5-android-intents)
 
@@ -18,16 +18,16 @@ The project exposes no HTTP API of its own. These are the interfaces it depends 
 |---|---|---|---|
 | `testConnection(key, dbId?)` | `POST /databases/{dbId}/query` or `GET /users/me` | `{ page_size: 1 }` | throws on failure |
 | `searchDatabases` | `POST /search` | `filter.object = database`, paginated | `[{ id, name }]` |
-| `getDatabaseSchema(dbId)` | `GET /databases/{dbId}` | — | raw `properties` map |
+| `getDatabaseSchema(dbId)` | `GET /databases/{dbId}` | none | raw `properties` map |
 | `fetchDatabasePages(dbId)` | `POST /databases/{dbId}/query` | paginated | `[{ id, name }]` (relation options) |
 | `listUsers` | `GET /users?page_size=100` | paginated | `[{ id, name }]` (people options) |
 | `createTimeEntry` | `POST /pages` | see below | `{ pageId }` |
-| `stopTimeEntry` | `PATCH /pages/{id}` | date `{start, end}`, status = done | — |
+| `stopTimeEntry` | `PATCH /pages/{id}` | date `{start, end}`, status = done | none |
 | `fetchRunningTimers` | `POST /databases/{dbId}/query` | `status equals <running>`, sorted by date desc, paginated | `[{ pageId, title, startISO, url }]` |
 | `fetchRecentEntries` | `POST /databases/{dbId}/query` | `status equals <done>`, date desc, `page_size: 15` | `[{ pageId, title, startISO, endISO, url }]` |
-| `updatePage` | `PATCH /pages/{id}` | `{ properties }` | — |
-| `getPageProperties` | `GET /pages/{id}` | — | raw `properties` |
-| `deletePage` | `PATCH /pages/{id}` | `{ archived: true }` (moves to Notion Trash) | — |
+| `updatePage` | `PATCH /pages/{id}` | `{ properties }` | none |
+| `getPageProperties` | `GET /pages/{id}` | none | raw `properties` |
+| `deletePage` | `PATCH /pages/{id}` | `{ archived: true }` (moves to Notion Trash) | none |
 
 ### Create a time entry
 

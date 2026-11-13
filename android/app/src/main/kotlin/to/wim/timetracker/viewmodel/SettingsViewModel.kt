@@ -164,7 +164,7 @@ class SettingsViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     fun setDynamicColor(enabled: Boolean) {
-        // Device-local — not part of the synced payload.
+        // Device-local, not part of the synced payload.
         _uiState.update { it.copy(dynamicColor = enabled) }
         viewModelScope.launch { settingsRepo.saveDynamicColor(enabled) }
     }
@@ -361,7 +361,7 @@ class SettingsViewModel(private val app: Application) : AndroidViewModel(app) {
             val existing = list.firstOrNull { it.id == edit.workspaceId }
 
             // The title property and the "project" relation are derived from the live
-            // schema, which is not always there — reopening a saved workspace while
+            // schema, which is not always there; reopening a saved workspace while
             // offline (or rate limited) leaves it empty. Deriving from an empty schema
             // wrote back a title property of "Name" and an empty relation, quietly
             // breaking a workspace that was configured correctly, so an unavailable

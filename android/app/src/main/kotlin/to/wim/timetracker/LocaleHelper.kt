@@ -11,7 +11,7 @@ object LocaleHelper {
     /**
      * Resolves a stored locale tag to one of the app's translations by its
      * language subtag. Both apps write their own tags into the shared sync
-     * page — this app stores `en`/`nl`, the Windows app stores `en-GB`/`nl-BE` —
+     * page: this app stores `en`/`nl`, the Windows app stores `en-GB`/`nl-BE`,
      * so a tag pulled from the other device has to resolve by language rather
      * than by exact match. `Locale("nl-BE")` builds a locale whose *language*
      * is the whole string, which matches no resource folder and silently falls

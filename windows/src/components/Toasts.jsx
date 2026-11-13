@@ -34,8 +34,9 @@ export default function Toasts() {
             onClick={() => dismissToast(toast.id)}
             className="shrink-0 opacity-70 hover:opacity-100"
             title={t('titleDismiss')}
+            aria-label={t('titleDismiss')}
           >
-            ✕
+            <span aria-hidden="true">✕</span>
           </button>
         </div>
       ))}

@@ -206,7 +206,7 @@ Cloud Messaging (requests and message: [api.md](api.md#5-sign-in-server)).
 | Workspaces, presets, active timer, preferences | electron-store `config.json` | DataStore `notion_settings` (JSON strings for structured values). Backed up. |
 | Time entries | Notion | Notion |
 | Shared settings | Sync server (`worker/`), one copy per Notion user | same |
-| Push token for timer notifications | — | Firebase's own files; which token the server has in SharedPreferences `push_device`. Never backed up. On the server: the token per Notion user (`devices`). |
+| Push token for timer notifications | none | Firebase's own files; which token the server has in SharedPreferences `push_device`. Never backed up. On the server: the token per Notion user (`devices`). |
 | Sync on or off | electron-store `syncEnabled` | DataStore `sync_enabled` |
 
 **Android backup.** Android's own backup (to the Google account) and phone-to-phone transfer copy

@@ -146,7 +146,7 @@ class SettingsRepository(private val context: Context) : TokenStore {
 
     /** Applies [transform] to the stored workspaces in one atomic edit and
      *  returns the result. Edits made from a screen's own copy of the list
-     *  wrote that whole copy back — undoing anything the sync (or another
+     *  wrote that whole copy back, undoing anything the sync (or another
      *  screen) had stored since that copy was taken. */
     suspend fun updateWorkspaces(transform: (List<Workspace>) -> List<Workspace>): List<Workspace> {
         var updated: List<Workspace> = emptyList()
@@ -296,7 +296,7 @@ class SettingsRepository(private val context: Context) : TokenStore {
     /**
      * "Now" in the exact shape the desktop app writes (`toISOString()`: UTC,
      * always three fraction digits). Both apps decide which side is newer by
-     * comparing these strings, and `Instant.toString()` varies its precision —
+     * comparing these strings, and `Instant.toString()` varies its precision,
      * it drops the fraction entirely on a whole second, and "…:05Z" sorts
      * after "…:05.300Z" although it is earlier.
      */

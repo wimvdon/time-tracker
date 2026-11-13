@@ -82,7 +82,7 @@ class TimerForegroundService : Service() {
 
     /**
      * Resources in the language chosen in Settings. A Service's own context
-     * follows the *system* language — only the Activity is locale-wrapped —
+     * follows the *system* language; only the Activity is locale-wrapped,
      * so the notification's title and Stop button used to stay in the phone's
      * language even when the app was set to another one.
      */
@@ -199,7 +199,7 @@ class TimerForegroundService : Service() {
                 }
                 if (stopped.isFailure) {
                     // The entry is still running in Notion. Clearing the local
-                    // timer here would lose it silently — offline, that meant
+                    // timer here would lose it silently; offline, that meant
                     // one tap on Stop and the entry ran on forever with nobody
                     // tracking it. Keep the timer and say so on the
                     // notification instead, so it can be stopped again.
@@ -243,7 +243,7 @@ class TimerForegroundService : Service() {
             "⏱ $workspaceName – $description" else "⏱ $workspaceName"
         val elapsedStr = formatElapsed(elapsedSecs)
         val contentText = if (stopFailed) {
-            "$elapsedStr — ${localised.getString(R.string.error_stop_from_notification_failed)}"
+            "$elapsedStr · ${localised.getString(R.string.error_stop_from_notification_failed)}"
         } else {
             elapsedStr
         }
