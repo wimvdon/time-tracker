@@ -84,7 +84,7 @@ export default {
   titleRemoveExtraField: 'Remove field',
   placeholderSelectField: 'Select field…',
   labelRequiredField: 'Required',
-  toastRequiredFieldsMissing: 'Please fill in all required fields before starting.',
+  toastRequiredFieldsMissing: 'Fill in all required fields before starting.',
   toastRequiredBeforeStopping: 'Fill in required fields (highlighted in red) before stopping.',
   labelDescriptionRequired: 'Description required',
   hintDescriptionRequired: 'A timer in this workspace cannot be stopped without a description.',

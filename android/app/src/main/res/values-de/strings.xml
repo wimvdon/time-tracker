@@ -63,7 +63,7 @@
     <string name="title_remove_extra_field">Feld entfernen</string>
     <string name="placeholder_select_field">Feld auswählen…</string>
     <string name="label_required_field">Erforderlich</string>
-    <string name="toast_required_fields_missing">Fülle bitte alle erforderlichen Felder aus, bevor du startest.</string>
+    <string name="toast_required_fields_missing">Fülle alle erforderlichen Felder aus, bevor du startest.</string>
     <string name="toast_required_before_stopping">Erforderliche Felder ausfüllen, bevor du stoppst.</string>
     <string name="label_description_required">Beschreibung erforderlich</string>
     <string name="hint_description_required">Ein Timer in diesem Arbeitsbereich kann ohne Beschreibung nicht gestoppt werden.</string>

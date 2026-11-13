@@ -63,7 +63,7 @@
     <string name="title_remove_extra_field">Supprimer le champ</string>
     <string name="placeholder_select_field">Sélectionner le champ…</string>
     <string name="label_required_field">Requis</string>
-    <string name="toast_required_fields_missing">Veuillez remplir tous les champs obligatoires avant de démarrer.</string>
+    <string name="toast_required_fields_missing">Remplissez tous les champs obligatoires avant de démarrer.</string>
     <string name="toast_required_before_stopping">Remplissez les champs requis avant d\'arrêter.</string>
     <string name="label_description_required">Description obligatoire</string>
     <string name="hint_description_required">Un minuteur de cet espace ne peut pas être arrêté sans description.</string>

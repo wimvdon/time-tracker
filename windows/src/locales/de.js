@@ -84,7 +84,7 @@ export default {
   titleRemoveExtraField: 'Feld entfernen',
   placeholderSelectField: 'Feld auswählen…',
   labelRequiredField: 'Erforderlich',
-  toastRequiredFieldsMissing: 'Bitte füllen Sie alle erforderlichen Felder aus, bevor Sie starten.',
+  toastRequiredFieldsMissing: 'Füllen Sie alle erforderlichen Felder aus, bevor Sie starten.',
   toastRequiredBeforeStopping: 'Erforderliche Felder (rot markiert) ausfüllen, bevor Sie stoppen.',
   labelDescriptionRequired: 'Beschreibung erforderlich',
   hintDescriptionRequired: 'Ein Timer in diesem Arbeitsbereich kann ohne Beschreibung nicht gestoppt werden.',
