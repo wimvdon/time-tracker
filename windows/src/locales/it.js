@@ -129,6 +129,7 @@ export default {
   titleSettings: 'Impostazioni',
 
   recentEntriesHeading: 'Registrazioni recenti',
+  recentEntriesFailed: 'Impossibile caricare le registrazioni recenti.',
   titleDeleteEntry: 'Elimina',
   titleOpenInNotion: 'Apri in Notion',
   titleStartFromEntry: 'Avvia un nuovo timer con questi dati',

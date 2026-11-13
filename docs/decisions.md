@@ -1,5 +1,20 @@
 # Technical decisions
 
+## 2026-11-13: Recent entries say when they couldn't load; readable tertiary text on Windows
+
+From an antislop accessibility pass, run against the Windows app in a browser.
+
+- **A failed load of recent entries now says so, with Retry, on both apps.** Before, a failed
+  query was ignored and the section disappeared, as if there were no entries. The message shows
+  only when a query failed and nothing is left to show; entries from a workspace that did load are
+  shown as before (`RecentEntriesLoad` on Android, `recentEntriesFailed` in the Windows store).
+- **Windows: light theme tertiary text from 0.446 to 0.58 black.** Fluent's value is 3.2:1 on the
+  app background, under WCAG AA's 4.5:1, and it is used for small text (headings, hints, entry
+  times). Dark mode's was already 5.7:1.
+- **Windows: icon buttons are at least 28 px and named.** Refresh and Settings were 20 px (WCAG 2.2
+  asks for 24), and the Settings back arrow was read out as "left arrow"; it is now "Back".
+- **Kept:** Windows buttons keep the arrow cursor, as native Windows (Fluent) buttons do.
+
 ## 2026-11-01: Claude Code sessions don't build the APK before pushing
 
 Sessions ran `./gradlew testDebugUnitTest lintDebug assembleDebug` before every push, and CI then

@@ -160,6 +160,8 @@ export const useStore = create((set, get) => ({
   recentlyStopped: {},
   recentEntries: [],
   recentEntriesLoading: false,
+  // True when the last load failed and there is nothing to show, so the list can say so.
+  recentEntriesFailed: false,
   deleteConfirm: null,
 
   // Deleted-page dialog: { notionPageId, title, startISO }
@@ -1047,6 +1049,7 @@ export const useStore = create((set, get) => ({
 
     set({ recentEntriesLoading: true });
     const allRecent = [];
+    let failed = false;
     for (const ws of workspaces) {
       const pm = ws.propertyMap;
       if (!ws.timeEntriesDbId || !pm?.timeEntryStatusProp || !pm?.timeEntryStatusDone) continue;
@@ -1061,7 +1064,7 @@ export const useStore = create((set, get) => ({
           allRecent.push({ ...page, workspaceId: ws.id, workspaceName: ws.name, propertyMap: pm });
         }
       } catch {
-        // silently ignore per-workspace errors
+        failed = true;
       }
     }
     allRecent.sort((a, b) => (b.endISO || b.startISO || '').localeCompare(a.endISO || a.startISO || ''));
@@ -1071,7 +1074,7 @@ export const useStore = create((set, get) => ({
     const merged = mergeById(get().recentEntries, top)
       .filter((r) => top.some((x) => x.pageId === r.pageId))
       .sort((a, b) => (b.endISO || b.startISO || '').localeCompare(a.endISO || a.startISO || ''));
-    set({ recentEntriesLoading: false, recentEntries: merged });
+    set({ recentEntriesLoading: false, recentEntries: merged, recentEntriesFailed: failed && merged.length === 0 });
   },
 
   confirmDelete: (entry, context) => set({ deleteConfirm: { pageId: entry.pageId, title: entry.title, context } }),

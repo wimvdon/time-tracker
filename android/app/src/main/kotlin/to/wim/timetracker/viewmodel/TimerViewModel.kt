@@ -84,6 +84,8 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
         val runningTimersError: String? = null,
         val recentEntries: List<RecentEntryInfo> = emptyList(),
         val recentEntriesLoading: Boolean = false,
+        /** The last load failed and there is nothing to show ([RecentEntriesLoad]). */
+        val recentEntriesFailed: Boolean = false,
         val deleteConfirmInfo: DeleteConfirmInfo? = null,
         val editTimerOpen: Boolean = false,
         val deletedPageDialogVisible: Boolean = false,
@@ -1104,6 +1106,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
 
         viewModelScope.launch {
             val allRecent = mutableListOf<RecentEntryInfo>()
+            var anyFailed = false
             for (ws in state.workspaces) {
                 val pm = ws.propertyMap
                 if (ws.timeEntriesDbId.isBlank() || pm.timeEntryStatusProp.isBlank() ||
@@ -1113,7 +1116,7 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
                         ws.timeEntriesDbId, pm.timeEntryStatusProp,
                         pm.timeEntryStatusDone, pm.timeEntryDateProp
                     )
-                }.getOrDefault(emptyList()).forEach { result ->
+                }.onFailure { anyFailed = true }.getOrDefault(emptyList()).forEach { result ->
                     allRecent.add(RecentEntryInfo(
                         pageId = result.pageId,
                         title = result.title,
@@ -1135,7 +1138,11 @@ class TimerViewModel(private val app: Application) : AndroidViewModel(app) {
                 val merged = mergeById(state.recentEntries, top) { r -> r.pageId }
                     .filter { it.pageId in topIds }
                     .sortedByDescending { it.endISO ?: it.startISO ?: "" }
-                state.copy(recentEntriesLoading = false, recentEntries = merged)
+                state.copy(
+                    recentEntriesLoading = false,
+                    recentEntries = merged,
+                    recentEntriesFailed = RecentEntriesLoad.failed(anyFailed, merged.size)
+                )
             }
         }
     }

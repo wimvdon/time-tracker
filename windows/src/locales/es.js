@@ -129,6 +129,7 @@ export default {
   titleSettings: 'Ajustes',
 
   recentEntriesHeading: 'Entradas de tiempo recientes',
+  recentEntriesFailed: 'No se pudieron cargar las entradas de tiempo recientes.',
   titleDeleteEntry: 'Eliminar',
   titleOpenInNotion: 'Abrir en Notion',
   titleStartFromEntry: 'Iniciar un nuevo temporizador con estos datos',

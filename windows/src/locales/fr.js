@@ -129,6 +129,7 @@ export default {
   titleSettings: 'Paramètres',
 
   recentEntriesHeading: 'Saisies de temps récentes',
+  recentEntriesFailed: 'Impossible de charger les saisies de temps récentes.',
   titleDeleteEntry: 'Supprimer',
   titleOpenInNotion: 'Ouvrir dans Notion',
   titleStartFromEntry: 'Démarrer un nouveau chronomètre avec ces informations',

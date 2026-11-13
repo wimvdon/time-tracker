@@ -129,6 +129,7 @@ export default {
   titleSettings: 'Einstellungen',
 
   recentEntriesHeading: 'Letzte Zeiteinträge',
+  recentEntriesFailed: 'Letzte Zeiteinträge konnten nicht geladen werden.',
   titleDeleteEntry: 'Löschen',
   titleOpenInNotion: 'In Notion öffnen',
   titleStartFromEntry: 'Neuen Timer mit diesen Angaben starten',

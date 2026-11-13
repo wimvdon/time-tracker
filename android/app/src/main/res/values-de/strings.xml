@@ -100,6 +100,7 @@
 
     <!-- Recent entries -->
     <string name="recent_entries_heading">Letzte Zeiteinträge</string>
+    <string name="recent_entries_failed">Letzte Zeiteinträge konnten nicht geladen werden.</string>
     <string name="title_delete_entry">Löschen</string>
     <string name="title_open_in_notion">In Notion öffnen</string>
     <string name="title_start_from_entry">Neuen Timer mit diesen Angaben starten</string>

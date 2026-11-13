@@ -119,7 +119,7 @@ export default function Timer() {
         onClick={refreshAll}
         title={t('btnRefreshAll')}
         aria-label={t('btnRefreshAll')}
-        className="text-fg3 hover:text-fg1 transition-colors flex items-center justify-center"
+        className="text-fg3 hover:text-fg1 hover:bg-subtle-hover rounded-md p-1 transition-colors flex items-center justify-center"
       >
         <ArrowClockwise20Regular className={`w-5 h-5 ${runningTimersLoading || recentEntriesLoading ? 'animate-spin' : ''}`} />
       </button>
@@ -128,7 +128,7 @@ export default function Timer() {
           onClick={onPlusButtonClicked}
           title={t('titleStartNewTimer')}
           aria-label={t('titleStartNewTimer')}
-          className="text-fg3 hover:text-fg1 transition-colors flex items-center justify-center"
+          className="text-fg3 hover:text-fg1 hover:bg-subtle-hover rounded-md p-1 transition-colors flex items-center justify-center"
         >
           <Add20Regular className="w-5 h-5" />
         </button>
@@ -136,7 +136,8 @@ export default function Timer() {
       <button
         onClick={() => setView('settings')}
         title={t('titleSettings')}
-        className="text-fg3 hover:text-fg1 transition-colors flex items-center justify-center"
+        aria-label={t('titleSettings')}
+        className="text-fg3 hover:text-fg1 hover:bg-subtle-hover rounded-md p-1 transition-colors flex items-center justify-center"
       >
         <Settings20Regular className="w-5 h-5" />
       </button>
@@ -1312,6 +1313,24 @@ function RecentEntries({ entries, workspaces, onDelete, onOpenUrl, onPlay }) {
   const showNotionLink = useStore((s) => s.showNotionLink);
   const showArchiveAction = useStore((s) => s.showArchiveAction);
   const isDarkTheme = useIsDarkTheme();
+  const failed = useStore((s) => s.recentEntriesFailed);
+  const retry = useStore((s) => s.loadRecentEntries);
+  if (!entries.length && failed) {
+    return (
+      <div className="w-full mt-6 pt-3 border-t border-stroke">
+        <span className="text-xs text-fg3">{t('recentEntriesHeading')}</span>
+        <div className="mt-2 flex items-center justify-between gap-3 text-sm text-fg2" role="status">
+          <span>{t('recentEntriesFailed')}</span>
+          <button
+            onClick={retry}
+            className="shrink-0 px-3 py-1 rounded-md bg-control hover:bg-control-hover active:bg-control-pressed border border-stroke text-sm"
+          >
+            {t('btnRetry')}
+          </button>
+        </div>
+      </div>
+    );
+  }
   if (!entries.length) return null;
   return (
     <div className="w-full mt-6 pt-3 border-t border-stroke">

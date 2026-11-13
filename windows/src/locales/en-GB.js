@@ -129,6 +129,7 @@ export default {
   titleSettings: 'Settings',
 
   recentEntriesHeading: 'Recent time entries',
+  recentEntriesFailed: "Couldn't load recent time entries.",
   titleDeleteEntry: 'Delete',
   titleOpenInNotion: 'Open in Notion',
   titleStartFromEntry: 'Start a new timer with these details',

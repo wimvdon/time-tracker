@@ -99,7 +99,7 @@ Also possible:
 ### Lists on the timer screen
 
 - **Active timers:** entries running in Notion, e.g. started on your phone. Click one to continue it on this device.
-- **Recent time entries:** the last finished entries. ▶ starts a new timer with the same details.
+- **Recent time entries:** the last finished entries. ▶ starts a new timer with the same details. If they couldn't be loaded (for example offline), the section says so with **Retry**.
 - **Refresh:** both lists reload automatically every minute, or on demand with the refresh button (bottom on Windows, top on Android).
 
 If the timer is stopped on another device, this one clears it within a minute: **Timer was stopped on another device.**

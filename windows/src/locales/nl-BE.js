@@ -129,6 +129,7 @@ export default {
   titleSettings: 'Instellingen',
 
   recentEntriesHeading: 'Recente tijdsregistraties',
+  recentEntriesFailed: 'Recente tijdsregistraties konden niet worden geladen.',
   titleDeleteEntry: 'Verwijderen',
   titleOpenInNotion: 'Openen in Notion',
   titleStartFromEntry: 'Nieuwe timer starten met deze gegevens',
