@@ -74,7 +74,7 @@
     <string name="rounding_5">Auf die nächsten 5 Minuten runden</string>
     <string name="rounding_10">Auf die nächsten 10 Minuten runden</string>
     <string name="rounding_15">Auf die nächsten 15 Minuten runden</string>
-    <string name="workspace_rounding_hint">Rundet Start- und Endzeiten (inklusive manueller Eingaben) auf das nächste Intervall.</string>
+    <string name="workspace_rounding_hint">Auch von Hand eingegebene Zeiten werden gerundet.</string>
     <string name="workspace_rounding_summary">Rundung: %1$d Min</string>
     <string name="label_workspace_color">Workspace-Farbe</string>
     <string name="label_custom_color">Benutzerdefinierter Hex-Wert</string>
@@ -152,7 +152,7 @@
 
     <!-- Additional New Strings -->
     <string name="warn_already_running_title">Timer läuft bereits</string>
-    <string name="warn_already_running_body">Ein Timer läuft bereits. Möchtest du ihn stoppen und den neuen starten, oder abbrechen?</string>
+    <string name="warn_already_running_body">Möchtest du ihn stoppen und den neuen starten?</string>
     <string name="btn_stop_and_start_new">Stoppen und neu starten</string>
     <string name="placeholder_preset_name">z.B. Morgen-Standup</string>
     <string name="label_preset_name">Name</string>
@@ -162,10 +162,10 @@
     <string name="hint_preset_required">Mit * markierte Felder werden zum Stoppen eines Timers benötigt. Eine Vorlage darf sie leer lassen.</string>
     <string name="tooltip_presets_shortcuts">Die obersten Vorlagen werden für Launcher-Verknüpfungen verwendet.</string>
     <string name="dialog_unsaved_changes_title">Ungespeicherte Änderungen</string>
-    <string name="dialog_unsaved_changes_body">Du hast ungespeicherte Änderungen. Möchtest du sie vor dem Verlassen speichern?</string>
+    <string name="dialog_unsaved_changes_body">Vor dem Verlassen speichern?</string>
     <string name="btn_discard">Verwerfen</string>
     <string name="dialog_time_error_title">Endzeit liegt vor Startzeit</string>
-    <string name="dialog_time_error_body">Die Endzeit liegt vor der Startzeit. Wolltest du den Timer am nächsten Tag stoppen?</string>
+    <string name="dialog_time_error_body">Wolltest du den Timer am nächsten Tag stoppen?</string>
     <string name="btn_edit">Bearbeiten</string>
     <string name="btn_next_day">Nächster Tag</string>
 

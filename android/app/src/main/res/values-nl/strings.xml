@@ -74,7 +74,7 @@
     <string name="rounding_5">Afronden naar 5 minuten</string>
     <string name="rounding_10">Afronden naar 10 minuten</string>
     <string name="rounding_15">Afronden naar 15 minuten</string>
-    <string name="workspace_rounding_hint">Rondt start- en stoptijden af, inclusief manueel ingevulde tijden.</string>
+    <string name="workspace_rounding_hint">Ook manueel ingevulde tijden worden afgerond.</string>
     <string name="workspace_rounding_summary">Afronden: %1$d min</string>
     <string name="label_workspace_color">Werkruimtekleur</string>
     <string name="label_custom_color">Aangepaste hex</string>
@@ -152,7 +152,7 @@
 
     <!-- Additional New Strings -->
     <string name="warn_already_running_title">Timer is al actief</string>
-    <string name="warn_already_running_body">Er is al een timer actief. Wil je die stoppen en de nieuwe starten, of annuleren?</string>
+    <string name="warn_already_running_body">Wil je die stoppen en de nieuwe starten?</string>
     <string name="btn_stop_and_start_new">Stoppen en nieuwe starten</string>
     <string name="placeholder_preset_name">bijv. Ochtendoverleg</string>
     <string name="label_preset_name">Naam</string>
@@ -162,10 +162,10 @@
     <string name="hint_preset_required">Velden met * zijn nodig om een timer te stoppen. Een snelstarter mag ze leeg laten.</string>
     <string name="tooltip_presets_shortcuts">De bovenste snelstarters worden gebruikt voor snelkoppelingen op het startscherm.</string>
     <string name="dialog_unsaved_changes_title">Niet-opgeslagen wijzigingen</string>
-    <string name="dialog_unsaved_changes_body">Je hebt niet-opgeslagen wijzigingen. Wil je deze opslaan voor je weggaat?</string>
+    <string name="dialog_unsaved_changes_body">Opslaan voor je weggaat?</string>
     <string name="btn_discard">Verwerpen</string>
     <string name="dialog_time_error_title">Eindtijd ligt voor starttijd</string>
-    <string name="dialog_time_error_body">De eindtijd is eerder dan de starttijd. Wilde je de timer op de volgende dag stoppen?</string>
+    <string name="dialog_time_error_body">Wilde je de timer op de volgende dag stoppen?</string>
     <string name="btn_edit">Bewerken</string>
     <string name="btn_next_day">Volgende dag</string>
 
