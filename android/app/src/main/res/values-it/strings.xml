@@ -74,7 +74,7 @@
     <string name="rounding_5">Arrotonda ai 5 minuti più vicini</string>
     <string name="rounding_10">Arrotonda ai 10 minuti più vicini</string>
     <string name="rounding_15">Arrotonda ai 15 minuti più vicini</string>
-    <string name="workspace_rounding_hint">Arrotonda gli orari di inizio e fine (inclusi quelli manuali) all\'intervallo più vicino.</string>
+    <string name="workspace_rounding_hint">Anche gli orari inseriti a mano vengono arrotondati.</string>
     <string name="workspace_rounding_summary">Arrotondamento: %1$d min</string>
     <string name="label_workspace_color">Colore spazio di lavoro</string>
     <string name="label_custom_color">Hex personalizzato</string>
@@ -152,7 +152,7 @@
 
     <!-- Additional New Strings -->
     <string name="warn_already_running_title">Timer già attivo</string>
-    <string name="warn_already_running_body">Un timer è già attivo. Vuoi fermarlo e avviare quello nuovo, oppure annullare?</string>
+    <string name="warn_already_running_body">Vuoi fermarlo e avviare quello nuovo?</string>
     <string name="btn_stop_and_start_new">Ferma e avvia nuovo</string>
     <string name="placeholder_preset_name">es. Standup mattutino</string>
     <string name="label_preset_name">Nome</string>
@@ -162,10 +162,10 @@
     <string name="hint_preset_required">I campi con * servono per fermare un timer. Una preimpostazione può lasciarli vuoti.</string>
     <string name="tooltip_presets_shortcuts">Le preimpostazioni in alto saranno usate per le scorciatoie di avvio.</string>
     <string name="dialog_unsaved_changes_title">Modifiche non salvate</string>
-    <string name="dialog_unsaved_changes_body">Hai modifiche non salvate. Vuoi salvarle prima di uscire?</string>
+    <string name="dialog_unsaved_changes_body">Salvarle prima di uscire?</string>
     <string name="btn_discard">Scarta</string>
     <string name="dialog_time_error_title">L\'ora di fine è antecedente all\'inizio</string>
-    <string name="dialog_time_error_body">L\'ora di fine si colloca prima dell\'ora di inizio. Vuoi fermare il timer il giorno successivo?</string>
+    <string name="dialog_time_error_body">Vuoi fermare il timer il giorno successivo?</string>
     <string name="btn_edit">Modifica</string>
     <string name="btn_next_day">Giorno successivo</string>
 
