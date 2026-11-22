@@ -15,8 +15,8 @@ are gone again.
   shortcuts are on white. Windows has no background: the bare dial, same tight fit as before.
 - **Details:** the slice, hand and pivot stay `#FAFAFA` (slice at 35%) as in the old icon; the
   themed layer keeps the hand cut out.
-- **Status bar icon:** back to Material's clock glyph, as before #169 (a small glyph, not the
-  generated dial).
+- **Status bar icon:** the dial silhouette (the themed layer's shape, hand cut out), tight on the
+  24dp canvas without padding, so it follows the app shape.
 - **Colour scheme:** the Android fallback palette is already seeded from `#F04438`, the middle
   stop, so nothing changed. On Windows the accent follows the system's accent colour, as before.
 - The `ShortcutIconColor` plate and slice helpers from #169 are removed with the plate.
