@@ -58,7 +58,7 @@ The two codebases share no code. They agree on Notion page shapes and the sync p
 | `SettingsSyncer` | `data/repository` | Settings sync through the worker (`SyncClient` in `data/api`, rule in `SyncDecision`), shared by Settings and the timer refresh loop |
 | `TimerViewModel` / `SettingsViewModel` | `viewmodel` | All screen logic: start/stop, rounding, presets, running and recent lists, 60 s refresh |
 | `TimerForegroundService` | `service` | Ongoing notification with live elapsed time and a **Stop** action. Stops the entry in Notion itself, so it works with the app closed. |
-| `ShortcutHelper` | root | Up to 4 presets as dynamic launcher shortcuts; each icon is the app's stopwatch in its workspace colour on a plate of that colour (`ShortcutIconColor`, darkened so the light slice stays readable), or the app icon when the workspace has no colour. Refreshed whenever workspaces are saved, synced or loaded |
+| `ShortcutHelper` | root | Up to 4 presets as dynamic launcher shortcuts; each icon is the app's clock with the dial in its workspace colour on white (`ShortcutIconColor`, darkened so the white hand stays readable), or the app icon when the workspace has no colour. Refreshed whenever workspaces are saved, synced or loaded |
 | UI | `ui/screens`, `ui/components`, `ui/theme` | Compose screens, dialogs, workspace colour theming |
 
 ## System flow

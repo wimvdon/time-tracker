@@ -67,28 +67,4 @@ class ShortcutIconColorTest {
         assertEquals(r, (fill shr 8) and 0xFF)
         assertEquals(r, fill and 0xFF)
     }
-
-    @Test
-    fun `the plate is the fill mixed with white, lighter at the top`() {
-        // The app icon's own red gives the app icon's plate.
-        val (top, bottom) = ShortcutIconColor.plateArgb(0xFFF04438.toInt())
-        assertEquals(0xFFFEECEB.toInt(), top)
-        assertEquals(0xFFFCDAD7.toInt(), bottom)
-        assertEquals(0xFFFDE3E1.toInt(), ShortcutIconColor.mixWithWhite(0xFFF04438.toInt(), 0.85))
-    }
-
-    @Test
-    fun `the slice stays readable on every shortcut fill`() {
-        for (hex in listOf("#ef4444", "#eab308", "#22c55e", "#3b82f6", "#ffffff", "#808080")) {
-            val fill = ShortcutIconColor.fillArgb(hex)!!
-            val ratio = ShortcutIconColor.contrast(fill, ShortcutIconColor.sliceArgb(fill))
-            assertTrue("$hex gives $ratio", ratio >= 2.3)
-        }
-    }
-
-    @Test
-    fun `mixing with white keeps the ends`() {
-        assertEquals(0xFF123456.toInt(), ShortcutIconColor.mixWithWhite(0xFF123456.toInt(), 0.0))
-        assertEquals(0xFFFFFFFF.toInt(), ShortcutIconColor.mixWithWhite(0xFF123456.toInt(), 1.0))
-    }
 }

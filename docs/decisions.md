@@ -1,5 +1,26 @@
 # Technical decisions
 
+## 2026-11-22: Icons: same padding in every app, white background, white details; colour scheme follows the icon
+
+Part of the owner's icon roll-out to all apps. Time Tracker goes back to its previous icon (the
+dial from before #169): a circle in orange → red → magenta with a white elapsed-time slice (35%
+opaque), a white hand and a white pivot. The stopwatch with a fading slice and its soft red plate
+are gone again.
+
+- **Padding:** the launcher foreground and themed layers sit in one group (pivot 54,54, scale
+  0.9724) so the dial's furthest point is 26.3 units from the middle of the 108 canvas. The
+  generator (`windows/scripts/generate-icons.cjs`) writes the group; the launcher shortcut bitmap
+  (`ShortcutHelper`) applies the same scale.
+- **Backgrounds:** the adaptive-icon background is plain white (it already was before #169); the
+  shortcuts are on white. Windows has no background: the bare dial, same tight fit as before.
+- **Details:** the slice, hand and pivot stay `#FAFAFA` (slice at 35%) as in the old icon; the
+  themed layer keeps the hand cut out.
+- **Status bar icon:** the dial silhouette (the themed layer's shape, hand cut out), tight on the
+  24dp canvas without padding, so it follows the app shape.
+- **Colour scheme:** the Android fallback palette is already seeded from `#F04438`, the middle
+  stop, so nothing changed. On Windows the accent follows the system's accent colour, as before.
+- The `ShortcutIconColor` plate and slice helpers from #169 are removed with the plate.
+
 ## 2026-11-22: New icon: a stopwatch with a fading slice
 
 Part of the owner's icon family for all apps: one meaningful shape with one gradient, on a soft
