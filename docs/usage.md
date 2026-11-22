@@ -61,7 +61,7 @@ A *workspace* is one Time Entries database plus how you use it. Add several to t
 | **Extra fields** *(optional)* | Up to five more columns shown on the timer (text, number, select, multi-select, status, date, checkbox, URL, email, phone, people, relation, file URL). Tick **Required** to block stopping until filled. |
 | **Description required** | Block stopping until a description is entered |
 | **Time rounding** | No rounding, 5, 10 or 15 minutes |
-| **Workspace colour** | Colours the timer, preset chips, Windows tray icon and the stopwatch on the Android launcher shortcuts (long-press the app icon) |
+| **Workspace colour** | Colours the timer, preset chips, Windows tray icon and the clock on the Android launcher shortcuts (long-press the app icon) |
 
 3. **Save**, then go back to the timer with the **←** arrow.
 

@@ -68,7 +68,7 @@ const DEFAULT_TIMER_COLOR = '#E53935';
 
 /** The tray icon while a timer runs: the app's stopwatch with its dial in the
  *  running timer's workspace colour, shaded top to bottom like the app icon.
- *  tray-template.png has a black stopwatch and a white slice; each pixel's grey level
+ *  tray-template.png has a black dial and white hand; each pixel's grey level
  *  says how far it sits toward white, so any colour can be painted in. */
 function makeColoredTrayIcon(hexColor) {
   const rgb = [1, 3, 5].map((i) => parseInt(hexColor.slice(i, i + 2), 16));

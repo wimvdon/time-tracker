@@ -6,8 +6,8 @@ import kotlin.math.roundToInt
 
 /**
  * The colour a launcher shortcut's icon is painted with: its workspace colour,
- * darkened (same hue and saturation) just enough for the light slice on the
- * stopwatch to keep ~3:1 contrast, the same rule as the Start button in the app
+ * darkened (same hue and saturation) just enough for the white clock hand on
+ * top to keep ~3:1 contrast, the same rule as the Start button in the app
  * (`workspaceSolidFillColor`). Plain Kotlin so it runs in unit tests.
  */
 object ShortcutIconColor {
@@ -30,22 +30,6 @@ object ShortcutIconColor {
             if (luminance(fromHsl(h, s, mid)) <= MAX_FILL_LUMINANCE) lo = mid else hi = mid
         }
         return fromHsl(h, s, lo)
-    }
-
-    /** The soft plate behind a shortcut's stopwatch, like the app icon's: the fill mixed with
-     *  white, 90% at the top left and 80% at the bottom right. */
-    fun plateArgb(fill: Int): Pair<Int, Int> = mixWithWhite(fill, 0.90) to mixWithWhite(fill, 0.80)
-
-    /** The plate's middle colour, which the stopwatch's elapsed-time slice is painted in. */
-    fun sliceArgb(fill: Int): Int = mixWithWhite(fill, 0.85)
-
-    /** [argb] moved [amount] (0..1) of the way to white, opaque. */
-    fun mixWithWhite(argb: Int, amount: Double): Int {
-        fun channel(shift: Int): Int {
-            val v = (argb shr shift) and 0xFF
-            return (v + (255 - v) * amount).roundToInt().coerceIn(0, 255)
-        }
-        return (0xFF shl 24) or (channel(16) shl 16) or (channel(8) shl 8) or channel(0)
     }
 
     /** Parses `#RRGGBB`, `RRGGBB`, `#AARRGGBB` or `AARRGGBB` into an opaque ARGB int. */
