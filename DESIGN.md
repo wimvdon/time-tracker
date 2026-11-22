@@ -9,19 +9,34 @@ unchanged to every app. Only the "This app" section belongs to this repository.
 
 ## Icons
 
-- White adaptive-icon background.
-- One bold shape with a diagonal gradient through neighbouring hues (top left to bottom
-  right), filling most of the 66dp safe zone.
-- One white detail inside that shape.
-- A themed (monochrome) layer: the same shape with the detail cut out.
+- One meaningful shape with one diagonal gradient through neighbouring hues (top left to bottom
+  right), filling most of the 66dp safe zone. The shape itself says what the app does: no
+  symbol dropped into a box, no shape inside a shape, no thin outlines, glass or drop shadows.
+- The adaptive-icon background is a soft plate tinted with the app colour, never white: the
+  middle gradient stop mixed with white, 90% at the top left to 80% at the bottom right
+  (`res/drawable/ic_launcher_background.xml`).
+- A detail inside the shape (a check, a play button) is solid in the plate's colour, not a
+  hole and not white, so the icon also reads without its plate.
+- A themed (monochrome) layer: the same shape, with the detail cut out or half transparent.
+- Every other icon of the app follows the same shape. Only icons the system shows as a tile
+  carry the plate: the launcher icon, home-screen shortcuts, TV banners and the icons of an
+  installed web app on a phone (maskable and Apple touch icons). Everywhere else the shape
+  stands on its own, without a plate: in-app logos, the TV home row logo, the status bar
+  (notification) icon, Quick Settings tiles, web favicons, desktop web app icons and extension
+  icons.
 
-| App | Shape | Gradient |
-| --- | --- | --- |
-| Watchlist | TV screen with a checkmark | `#3D7BFF` → `#7A5CFF` → `#D15CE6` |
-| Time Tracker for Notion | Stopwatch dial with a hand | `#FF8A3D` → `#F04438` → `#C81E5A` |
-| Snoozer | Nine-lobed "cookie" (the home screen toggle) with a bell | `#22C3B4` → `#3E7BDA` → `#4E5BB0` |
-| RSS Reader | The feed symbol on its own (owner's choice, see its "This app") | `#4FC3F7` → `#0091EA` → `#0D47A1` |
-| Noter for Notion | Sticky note on a 3D box with a folded corner | `#FFC94D` → `#F5A623` → `#E8710A` |
+| App | Shape | Gradient | Plate |
+| --- | --- | --- | --- |
+| Watchlist | Wide TV screen with a fat check on its right side | `#3D7BFF` → `#7A5CFF` → `#D15CE6` | `#F2EFFF` → `#E4DEFF` |
+| Content | A C built from the feed symbol's dot and arcs | `#4FC3F7` → `#0091EA` → `#0D47A1` | `#E6F4FD` → `#CFE6F8` |
+| Player | Three uneven bars on their side | `#FFA23A` → `#F0243A` → `#A0105E` | `#FCE9E8` → `#F9D3D1` |
+| Clauder | Progress ring of six segments around a check | `#FAA75E` → `#DA6440` → `#A52E52` | `#FBF1EE` → `#F7E4DD` |
+| Quick Settings | Settings cogwheel with a lightning bolt | `#4FC3F7` → `#3D7BFF` → `#5B4FD9` | `#ECF2FF` → `#D8E5FF` |
+| TV Favorites | Heart with a play button | `#FF7AA8` → `#E83A7A` → `#A82BC4` | `#FDEBF2` → `#F6D5E6` |
+| Screensaver | Crescent moon | `#B388FF` → `#7C4DFF` → `#4527A0` | `#F2EDFF` → `#E5DBFF` |
+| Time Tracker for Notion | Stopwatch with its elapsed time as a slice that fades in | `#FF8A3D` → `#F04438` → `#C81E5A` | `#FEECEB` → `#FCDAD7` |
+| Snoozer | Bell with one fat Z on it | `#22C3B4` → `#3E7BDA` → `#4E5BB0` | `#ECF2FB` → `#D8E5F8` |
+| Noter for Notion | Sticky note on a 3D box with a folded corner (not redesigned yet: white background) | `#FFC94D` → `#F5A623` → `#E8710A` | |
 
 ## Colour
 
@@ -257,8 +272,15 @@ app apart from their package (and `R` import) lines. Copy a change to the other 
 - Preset chips keep Material's 48dp touch target.
 - Start is green and Stop is red whatever the theme or wallpaper colours (a workspace colour
   replaces the green), so their meaning never depends on Dynamic color.
+- The icon is a stopwatch (round body, crown on a short stem, side button) in orange → red →
+  raspberry, with the elapsed time as a slice of the dial in the plate's colour that fades in
+  from 12 o'clock (transparent) to the hand (solid). On Android it sits on a soft red plate; on
+  Windows (app, taskbar, installer) it stands on its own. The tray shows the same stopwatch, grey
+  while idle and in the running workspace's colour. The Android launcher shortcuts show it in the
+  workspace colour on a plate tinted with that colour.
 - The launcher icon comes from `windows/scripts/generate-icons.cjs` (`npm run icons`), which
-  also draws the Windows icons. Edit the artwork there, not the generated XML.
+  also draws the Windows icons and the Android status bar icon. Edit the artwork there, not the
+  generated XML.
 - The Windows app is not covered by this file. Its timer follows the same order in Fluent
   terms (Subtitle workspace title as a drop-down button, the time in Title Large on a card with
   Start or Stop as the card's action, a card with every field; presets made and edited from

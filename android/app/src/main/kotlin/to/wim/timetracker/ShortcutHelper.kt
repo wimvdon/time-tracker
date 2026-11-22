@@ -4,8 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.LinearGradient
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.RectF
+import android.graphics.Shader
+import android.graphics.SweepGradient
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
@@ -51,9 +55,10 @@ object ShortcutHelper {
     }
 
     /**
-     * The app icon's clock (see `ic_launcher_foreground.xml`, a 108×108 grid)
-     * with its dial in the workspace colour instead of the orange gradient, on
-     * the same white background, as a full-bleed adaptive-icon bitmap.
+     * The app icon's stopwatch (see `ic_launcher_foreground.xml`, a 108×108 grid) in the
+     * workspace colour instead of the orange gradient, on a plate tinted with the same colour,
+     * as a full-bleed adaptive-icon bitmap. The elapsed-time slice fades in from 12 o'clock to
+     * the hand, like the app icon's.
      */
     private fun clockIcon(context: Context, fill: Int): Bitmap {
         val size = (108 * context.resources.displayMetrics.density).toInt().coerceIn(108, 432)
@@ -61,26 +66,30 @@ object ShortcutHelper {
         val canvas = Canvas(bitmap)
         val unit = size / 108f
         canvas.scale(unit, unit)
-        canvas.drawColor(android.graphics.Color.WHITE)
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-        // Dial.
+        // Plate.
+        val (plateTop, plateBottom) = ShortcutIconColor.plateArgb(fill)
+        paint.shader = LinearGradient(18f, 18f, 90f, 90f, plateTop, plateBottom, Shader.TileMode.CLAMP)
+        canvas.drawRect(0f, 0f, 108f, 108f, paint)
+        paint.shader = null
+        // Body, crown on its stem, and the side button at half past one.
         paint.color = fill
-        canvas.drawCircle(54f, 54f, 27f, paint)
-        // Elapsed-time wedge, from 12 o'clock to half past four.
-        paint.color = HAND_COLOR
-        paint.alpha = (0.35f * 255).toInt()
-        canvas.drawArc(RectF(34f, 34f, 74f, 74f), -90f, 135f, true, paint)
-        // Hand.
-        paint.alpha = 255
-        paint.style = Paint.Style.STROKE
-        paint.strokeWidth = 5.5f
-        paint.strokeCap = Paint.Cap.ROUND
-        canvas.drawLine(54f, 54f, 65.67f, 65.67f, paint)
-        // Centre dot.
-        paint.style = Paint.Style.FILL
-        canvas.drawCircle(54f, 54f, 4.2f, paint)
+        canvas.drawCircle(54f, 59f, 22f, paint)
+        canvas.drawRoundRect(RectF(48f, 25f, 60f, 32f), 3f, 3f, paint)
+        canvas.drawRect(51.5f, 30f, 56.5f, 39f, paint)
+        canvas.save()
+        canvas.rotate(45f, 54f, 59f)
+        canvas.drawRect(50.5f, 32f, 57.5f, 38.5f, paint)
+        canvas.restore()
+        // Elapsed time: a slice from 12 o'clock to 130°, transparent at the start, solid at the end.
+        val slice = ShortcutIconColor.sliceArgb(fill)
+        val clear = slice and 0x00FFFFFF
+        val sweep = SweepGradient(54f, 59f, intArrayOf(clear, slice), floatArrayOf(0f, 130f / 360f))
+        // Android's sweep starts at 3 o'clock; turn it to start at 12.
+        sweep.setLocalMatrix(Matrix().apply { setRotate(-90f, 54f, 59f) })
+        paint.shader = sweep
+        canvas.drawArc(RectF(38f, 43f, 70f, 75f), -90f, 130f, true, paint)
+        paint.shader = null
         return bitmap
     }
-
-    private const val HAND_COLOR = 0xFFFAFAFA.toInt()
 }
