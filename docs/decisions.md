@@ -1,5 +1,17 @@
 # Technical decisions
 
+## 2026-11-22: New icon: a stopwatch with a fading slice
+
+Part of the owner's icon family for all apps: one meaningful shape with one gradient, on a soft
+plate tinted with the app colour on Android (`#FEECEB` → `#FCDAD7`, never white) and with no
+tile on Windows. The round dial became a stopwatch (crown and side button), and the hand and
+pivot gave way to the elapsed time: a slice from 12 o'clock to the hand in the plate's colour,
+fading from transparent to solid (owner's choice from three mockups, round 21, with the fade as
+the owner's own addition). Android draws the fade with a sweep gradient; the reference
+`icon.svg` approximates it with a linear one. The status bar icon is now the generated themed
+stopwatch instead of Material's clock, and the launcher shortcuts draw the same stopwatch in the
+workspace colour on a plate of that colour (`ShortcutIconColor.plateArgb`).
+
 ## 2026-11-13: Recent entries say when they couldn't load; readable tertiary text on Windows
 
 From an antislop accessibility pass, run against the Windows app in a browser.
