@@ -36,7 +36,7 @@ unchanged to every app. Only the "This app" section belongs to this repository.
 | Screensaver | Crescent moon | `#B388FF` → `#7C4DFF` → `#4527A0` | `#F2EDFF` → `#E5DBFF` |
 | Time Tracker for Notion | Stopwatch with its elapsed time as a slice that fades in | `#FF8A3D` → `#F04438` → `#C81E5A` | `#FEECEB` → `#FCDAD7` |
 | Snoozer | Bell with one fat Z on it | `#22C3B4` → `#3E7BDA` → `#4E5BB0` | `#ECF2FB` → `#D8E5F8` |
-| Noter for Notion | Sticky note on a 3D box with a folded corner (not redesigned yet: white background) | `#FFC94D` → `#F5A623` → `#E8710A` | |
+| Noter for Notion | Sticky note with its bottom right corner folded over and two lines of text | `#FFC94D` → `#F5A623` → `#E8710A` | `#FEF6E9` → `#FDEDD3` |
 
 ## Colour
 
