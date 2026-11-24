@@ -1,5 +1,12 @@
 # Technical decisions
 
+## 2026-11-24: Status bar icon keeps Material's 2dp padding
+
+The status bar and lock screen icon (`ic_notification.xml`) drew the dial edge to edge on its
+24dp canvas. Its outermost pixels were cut off at the canvas border, so the circle looked
+slightly flattened on the lock screen. The dial is now 20dp wide with 2dp padding on every side,
+the live area Material uses for status bar icons. Shape and cut-out hand are unchanged.
+
 ## 2026-11-22: Icons: same padding in every app, white background, white details; colour scheme follows the icon
 
 Part of the owner's icon roll-out to all apps. Time Tracker goes back to its previous icon (the
